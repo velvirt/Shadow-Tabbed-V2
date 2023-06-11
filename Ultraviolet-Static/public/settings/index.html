@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Settings Page</title>
+  <link rel="stylesheet" type="text/css" href="index.css">
+  <link href="https://fonts.cdnfonts.com/css/blacklisted" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Games</a></li>
+            <li><a href="settings/">Settings</a></li>
+          </ul>
+      </nav>
+    <h1 class="header-effect">Settings</h1>
+  </header>
+
+  <div class="flex-center">
+    <div class="category-row">
+        <div class="category">
+            <h2>Search Engine</h2>
+            <select id="searchEngineDropdown">
+              <option value="">Select an option</option>
+              <option value="google">Google</option>
+              <option value="bing">Bing</option>
+              <option value="yahoo">Yahoo</option>
+              <option value="duckduckgo">DuckDuckGo</option>
+              <option value="brave">Brave</option>
+              <option value="yandex">Yandex</option>
+            </select>
+          </div>          
+          <div class="category">
+            <h2>About:Blank</h2>
+            <div class="button-container">
+              <button onclick="openNewWindow()">Open in New Window</button>
+              <button onclick="openNewTab()">Open in New Tab</button>
+            </div>
+          </div>          
+    </div>
+    <div class="category-row">
+      <div class="category">
+
+      </div>
+      <div class="category">
+
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+<script>
+// Function to handle dropdown change event and set the search engine value in local storage
+function setSearchEngine(value) {
+  localStorage.setItem("searchengine", value);
+}
+
+// Add change event listener to the dropdown
+document.getElementById("searchEngineDropdown").addEventListener("change", function() {
+  var selectedEngine = this.value;
+  switch (selectedEngine) {
+    case "google":
+      setSearchEngine("https://www.google.com/search?q=%s");
+      break;
+    case "bing":
+      setSearchEngine("https://www.bing.com/search?form=&q=%s");
+      break;
+    case "yahoo":
+      setSearchEngine("https://search.yahoo.com/search?p=%s");
+      break;
+    case "duckduckgo":
+      setSearchEngine("https://duckduckgo.com/?q=%s");
+      break;
+    case "brave":
+      setSearchEngine("https://search.brave.com/search?q=%s");
+      break;
+    case "yandex":
+      setSearchEngine("https://www.yandex.com/search/?text=%s");
+      break;
+    default:
+      localStorage.removeItem("searchengine");
+      break;
+  }
+});
+ </script>
+
+<script>
+  function openNewTab() {
+    const currentURL = window.location.href;
+    const newTab = window.open('about:blank', '_blank');
+    newTab.document.write('<html><body style="margin: 0; padding: 0;"><embed src="' + currentURL + '" style="width: 100%; height: 100%;"></embed></body></html>');
+    newTab.document.close();
+  }
+  
+  function openNewWindow() {
+    const currentURL = window.location.href;
+    const newWindow = window.open('about:blank', '_blank', 'width=800,height=600');
+    newWindow.document.write('<html><body style="margin: 0; padding: 0;"><embed src="' + currentURL + '" style="width: 100%; height: 100%;"></embed></body></html>');
+    newWindow.document.close();
+  }
+  
+</script>

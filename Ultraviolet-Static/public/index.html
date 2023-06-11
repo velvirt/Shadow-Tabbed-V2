@@ -11,7 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/blacklisted" rel="stylesheet">
     <script src="search.js" defer></script>
     <script src="index.js" defer></script>
     <script type="application/ld+json">
@@ -24,7 +26,7 @@
         <li><a href="#">Home</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Games</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="settings/">Settings</a></li>
       </ul>
     </div>
   
@@ -39,7 +41,7 @@
     <form id="uv-form" class="flex-center">
       <input
         id="uv-search-engine"
-        value="https://www.google.com/search?q=%s"
+        value=""
         type="hidden"
       />
       <input id="uv-address" type="text" placeholder="Search the web freely" />
@@ -48,7 +50,7 @@
       <img src="shortcuts/google_logo.png" onclick="openURL('google.com')" alt="Shortcut 1">
       <img src="shortcuts/youtube.png" onclick="openURL('youtube.com')" style="width:60px" alt="Shortcut 2">
       <img src="shortcuts/discord.png" onclick="openURL('discord.com/app')" style="height:30px; margin-top:0.5%;"  alt="Shortcut 2">
-      <img src="shortcuts/nowgg.png" onclick="openURL('now.gg')" style="width:60px; height:60px; margin-top:-0.25%"  alt="Shortcut 2">
+      <img src="shortcuts/nowgg.png" onclick="openURL('now.gg')" style="width:65px; height:65px; margin-top:-0.45%"  alt="Shortcut 2">
     </div>
     <div class="desc left-margin">
       <p id="uv-error"></p>
@@ -74,4 +76,35 @@ window.addEventListener('load', function() {
   setInterval(calculatePing, 1000/10); // Update every 5 seconds
 });
 
+</script>
+
+
+<script>
+// Retrieve the search engine value from local storage
+var searchEngineValue = localStorage.getItem("searchengine");
+
+// Set the default value if no search engine value is found
+if (!searchEngineValue) {
+  searchEngineValue = "https://www.google.com/search?q=%s";
+}
+// Set the value of the input field
+document.getElementById("uv-search-engine").value = searchEngineValue;
+
+</script>
+
+<script>
+  function openNewTab() {
+    const currentURL = window.location.href;
+    const newTab = window.open('about:blank', '_blank');
+    newTab.document.write('<html><body style="margin: 0; padding: 0;"><embed src="' + currentURL + '" style="width: 100%; height: 100%;"></embed></body></html>');
+    newTab.document.close();
+  }
+  
+  function openNewWindow() {
+    const currentURL = window.location.href;
+    const newWindow = window.open('about:blank', '_blank', 'width=800,height=600');
+    newWindow.document.write('<html><body style="margin: 0; padding: 0;"><embed src="' + currentURL + '" style="width: 100%; height: 100%;"></embed></body></html>');
+    newWindow.document.close();
+  }
+  
 </script>
