@@ -36,3 +36,16 @@ form.addEventListener("submit", async (event) => {
   location.href="load.html"
   //location.href = __uv$config.prefix + __uv$config.encodeUrl(url);
 });
+
+async function openURL(url) {
+  try {
+    await registerSW();
+  } catch (err) {
+    error.textContent = "Failed to register service worker.";
+    errorCode.textContent = err.toString();
+    throw err;
+  }
+
+  localStorage.setItem('site', __uv$config.prefix + __uv$config.encodeUrl(url));
+  location.href = "load.html";
+}
