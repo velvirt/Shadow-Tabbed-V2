@@ -8,6 +8,10 @@
     <script src="uv/uv.bundle.js" defer></script>
     <script src="uv/uv.config.js" defer></script>
     <script src="register-sw.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap" rel="stylesheet">
     <script src="search.js" defer></script>
     <script src="index.js" defer></script>
     <script type="application/ld+json">
@@ -23,6 +27,15 @@
         <li><a href="#">Contact</a></li>
       </ul>
     </div>
+  
+    <header>
+      <h1>Welcome to Shadow</h1>
+      <p>The Flagship proxy of Phantom Network made to evade school restrictions</p>
+      <p>Currently Supporting Now.GG</p> <br>
+      <i class="fa-brands fa-github fa-xl"></i>
+      <i class="fa-brands fa-discord fa-xl" style="margin-left: 5px;"></i> <br>
+      <p id="ping-time"></p>
+    </header>
     <form id="uv-form" class="flex-center">
       <input
         id="uv-search-engine"
@@ -37,3 +50,22 @@
     </div>
   </body>
 </html>
+
+<script>
+function calculatePing() {
+  var startTime = new Date().getTime();
+
+  navigator.sendBeacon('/ping', '');
+
+  var endTime = new Date().getTime();
+  var pingTime = endTime - startTime;
+  var statusElement = document.getElementById('ping-time');
+  statusElement.textContent = 'Ping: ' + pingTime + ' ms';
+}
+
+window.addEventListener('load', function() {
+  calculatePing(); // Measure the ping when the website loads
+  setInterval(calculatePing, 1000/10); // Update every 5 seconds
+});
+
+</script>
