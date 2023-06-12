@@ -26,8 +26,8 @@ if (tabData.icon) {
 
 // Default tab settings
 var settingsDefaultTab = {
-  title: "TIW SETTINGS",
-  icon: "/logo.png",
+  title: "Shadow Settings",
+  icon: "",
 };
 
 // Function to set the document title
@@ -107,7 +107,7 @@ function setCloak() { // applies only to premade cloaks
   switch (cloak) {
     case "search": // Google Search
       setTitle("Google Search");
-      setFavicon( window.location.href + "/cloaks/Google Search.ico");
+      setFavicon("/cloaks/Google Search.ico");
       location.reload();
       break;
     case "drive": // Google Drive
@@ -152,7 +152,7 @@ function setCloak() { // applies only to premade cloaks
       break;
     case "khan": // Khan Academy
       setTitle("Khan Academy"); 
-      setFavicon("/cloaks/khan.ico");
+      setFavicon("/cloaks/Khan Academy.ico");
       location.reload();
       break;
   }

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Settings Page</title>
+  <title>Shadow Settings</title>
   <link rel="stylesheet" type="text/css" href="index.css">
   <link href="https://fonts.cdnfonts.com/css/blacklisted" rel="stylesheet">
+  <link rel="icon" type="image/png"  href="">
 </head>
-<body>
+<body style="overflow: hidden;">
     <nav class="navbar">
         <ul>
             <li><a href="#">Home</a></li>
@@ -41,11 +42,43 @@
     </div>
     <div class="category-row">
       <div class="category">
-
+        <h2 style="margin-bottom: -16px;">Tab Cloak</h2>
+        <div class="section-content">
+          <div class="buttons">
+            <input id="title" class="input" placeholder="Title" onkeyup="setTitle(this.value)" />
+            <input id="icon" class="input" placeholder="Favicon" onkeyup="setFavicon(this.value.trim())" />
+          </div>
+          <p class="section-text">Ready Made Cloaks</p>
+          <div class="buttons">
+            <select name="Readymade Cloaks" id="premadecloaks" title="Cloaks">
+              <option value="search">Google Search</option>
+              <option value="drive">Google Drive</option>
+              <option value="youtube">YouTube</option>
+              <option value="gmail">Gmail</option>
+              <option value="calendar">Google Calendar</option>
+              <option value="meets">Google Meet</option>
+              <option value="classroom">Google Classroom</option>
+              <option value="canvas">Canvas</option>
+              <option value="zoom">Zoom</option>
+              <option value="khan">Khan Academy</option>
+            </select>
+            <div class="select-buttons">
+              <button class="button button2" onclick="setCloak()">Set</button>
+              <button class="button button2" onclick="resetTab()">Reset</button>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="category">
-
-      </div>
+        <h2>Panic Key</h2>
+        <div class="section-content">
+          <div class="panic-key-container">
+            <p>Set up your Panic Key to hide this website</p>
+            <input id="key-input" type="text" placeholder="Key" value="]">
+            <input id="website-input" type="text" placeholder="Website" value="https://classroom.gooogle.com">
+          </div>
+        </div>
+      </div>      
     </div>
   </div>
 
@@ -105,3 +138,6 @@ document.getElementById("searchEngineDropdown").addEventListener("change", funct
   }
   
 </script>
+<script src="js/panic.js"></script>
+<script src="js/index.js"></script>
+<script src="js/settings.js"></script>
