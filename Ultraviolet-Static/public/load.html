@@ -61,64 +61,20 @@
 <body>
   <div class="loading-screen">
     <div class="loading-spinner"></div>
-    <p class="loading-text" id="loading-text">Loading ...</p>
-    <p class="timer" id="timer" style="display:inline"></p>
+    <p class="loading-text" id="loading-text">Loading...</p>
   </div>
 
   <iframe id="site-iframe" src=""></iframe>
 
   <script>
-    var siteUrl = localStorage.getItem("site");
+    //var siteUrl = localStorage.getItem("site");
     var iframe = document.getElementById("site-iframe");
-    var loadingText = document.getElementById("loading-text");
-    var timer = document.getElementById("timer");
-    var startTime;
-  
+    iframe.src = localStorage.getItem("site");
     iframe.onload = function() {
       iframe.style.display = "block";
       document.querySelector(".loading-screen").style.display = "none";
       document.title = "Loaded Page";
-      clearInterval(timerInterval); // Stop the timer interval when the page is loaded
     };
-  
-    iframe.src = siteUrl;
-    startTime = new Date().getTime();
-  
-    // Start loading animation
-    var loadingAnimationInterval = setInterval(function() {
-      var loadingAnimation = loadingText.innerHTML;
-      if (loadingAnimation === "Loading ...") {
-        loadingAnimation = "Loading ..";
-      } else if (loadingAnimation === "Loading ..") {
-        loadingAnimation = "Loading .";
-      } else {
-        loadingAnimation = "Loading ...";
-      }
-      loadingText.innerHTML = loadingAnimation;
-    }, 500);
-  
-    // Start timer interval
-    var timerInterval = setInterval(function() {
-      var currentTime = new Date().getTime();
-      var elapsedTime = currentTime - startTime;
-      timer.innerHTML = "Load Time: " + formatTime(elapsedTime);
-    }, 10);
-  
-    function formatTime(time) {
-      var minutes = Math.floor(time / 60000);
-      var seconds = Math.floor((time % 60000) / 1000);
-      var milliseconds = Math.floor((time % 1000) / 10);
-      return (
-        (minutes < 10 ? "0" : "") +
-        minutes +
-        ":" +
-        (seconds < 10 ? "0" : "") +
-        seconds +
-        "." +
-        (milliseconds < 10 ? "0" : "") +
-        milliseconds
-      );
-    }
   </script>
   
 </body>
