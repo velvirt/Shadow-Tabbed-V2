@@ -63,21 +63,50 @@
 <body>
   <div class="loading-screen" style="z-index: -9999;" >
     <div class="loading-spinner"></div>
-    <p class="loading-text" id="loading-text">Loading...</p>
+    <p class="loading-text" id="loading-text">Loading ...</p>
+    <p class="timer" id="timer" style="display:inline"></p>
+
   </div>
 
   <iframe id="site-iframe" src="" style="z-index: 9999;"></iframe>
 
-<script>
-  var iframe = document.getElementById("site-iframe");
-  iframe.src = localStorage.getItem("site");
+  <script>
+    var iframe = document.getElementById("site-iframe");
+    iframe.src = localStorage.getItem("site");
 
-  iframe.onload = function() {
-    iframe.style.display = "flex";
-    document.title = "Loaded Page";
-  };
+    var loadingText = document.getElementById("loading-text");
+    var startTime = new Date().getTime();
+    var timer = document.getElementById("timer");
 
-</script>
+    iframe.onload = function() {
+      iframe.style.display = "block";
+      document.querySelector(".loading-screen").style.display = "none";
+      document.title = "Loaded Page";
+      clearInterval(timerInterval); // Stop the timer interval when the page is loaded
+    };
+
+    var timerInterval = setInterval(function() {
+      var currentTime = new Date().getTime();
+      var elapsedTime = currentTime - startTime;
+      timer.innerHTML = "Load Time: " + formatTime(elapsedTime);
+    }, 10);
+
+    function formatTime(time) {
+      var minutes = Math.floor(time / 60000);
+      var seconds = Math.floor((time % 60000) / 1000);
+      var milliseconds = Math.floor((time % 1000) / 10);
+      return (
+        (minutes < 10 ? "0" : "") +
+        minutes +
+        ":" +
+        (seconds < 10 ? "0" : "") +
+        seconds +
+        "." +
+        (milliseconds < 10 ? "0" : "") +
+        milliseconds
+      );
+    }
+  </script>
 
   
 </body>
