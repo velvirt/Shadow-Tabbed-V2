@@ -1,29 +1,22 @@
-// Cache DOM elements
 const form = document.getElementById("uv-form");
 const address = document.getElementById("uv-address");
 const searchEngine = document.getElementById("uv-search-engine");
 const error = document.getElementById("uv-error");
 const errorCode = document.getElementById("uv-error-code");
 
-
-form.addEventListener("submit", async (event) => {
+form.addEventListener("submit", (event) => {
   event.preventDefault();
-  setTimeout(async () => {
-    try {
-      await registerSW();
-    } catch (err) {
-      error.textContent = "Failed to register service worker.";
-      errorCode.textContent = err.toString();
-      throw err;
-    }
-    
-    const url = search(address.value, searchEngine.value);
-    localStorage.setItem('site', __uv$config.prefix + __uv$config.encodeUrl(url));
-    location.href = "load.html";
-    //location.href = __uv$config.prefix + __uv$config.encodeUrl(url);
-  }, 0);
-});
 
+  const url = search(address.value, searchEngine.value);
+  localStorage.setItem('site', __uv$config.prefix + __uv$config.encodeUrl(url));
+  location.href = "load.html";
+
+  registerSW().catch((err) => {
+    error.textContent = "Failed to register service worker.";
+    errorCode.textContent = err.toString();
+    throw err;
+  });
+});
 
 async function openURL(url) {
   try {
@@ -31,7 +24,11 @@ async function openURL(url) {
   } catch (err) {
     error.textContent = "Failed to register service worker.";
     errorCode.textContent = err.toString();
-    throw err;
+    // Handle the error gracefully, no need to re-throw
+  }
+
+  if (!url.startsWith("https://") && !url.startsWith("http://")) {
+    url = "https://" + url;
   }
 
   localStorage.setItem('site', __uv$config.prefix + __uv$config.encodeUrl(url));
