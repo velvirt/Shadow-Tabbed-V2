@@ -15,7 +15,9 @@
       width: 100%;
       height: 100%;
       border: none;
-      display: none;
+      position: fixed;
+      top:0;
+      display: flex;
     }
     
     .loading-screen {
@@ -59,23 +61,24 @@
   </style>
 </head>
 <body>
-  <div class="loading-screen">
+  <div class="loading-screen" style="z-index: -9999;" >
     <div class="loading-spinner"></div>
     <p class="loading-text" id="loading-text">Loading...</p>
   </div>
 
-  <iframe id="site-iframe" src=""></iframe>
+  <iframe id="site-iframe" src="" style="z-index: 9999;"></iframe>
 
-  <script>
-    //var siteUrl = localStorage.getItem("site");
-    var iframe = document.getElementById("site-iframe");
-    iframe.src = localStorage.getItem("site");
-    iframe.onload = function() {
-      iframe.style.display = "block";
-      document.querySelector(".loading-screen").style.display = "none";
-      document.title = "Loaded Page";
-    };
-  </script>
+<script>
+  var iframe = document.getElementById("site-iframe");
+  iframe.src = localStorage.getItem("site");
+
+  iframe.onload = function() {
+    iframe.style.display = "flex";
+    document.title = "Loaded Page";
+  };
+
+</script>
+
   
 </body>
 </html>
