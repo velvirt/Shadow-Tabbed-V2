@@ -1,16 +1,22 @@
-import createBareServer from "@tomphttp/bare-server-node";
+import compression from "compression";
 import express from "express";
-import { createServer } from "node:http";
+import { createServer } from "http";
 import { publicPath } from "ultraviolet-static";
 import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
-import { join } from "node:path";
-import { hostname } from "node:os";
+import { join } from "path";
+import { hostname } from "os";
+import createBareServer from "@tomphttp/bare-server-node";
 
 const bare = createBareServer("/bare/");
 const app = express();
+const server = createServer();
+
+// Enable compression
+app.use(compression());
 
 // Load our publicPath first and prioritize it over UV.
-app.use(express.static(publicPath));
+app.use(express.static(publicPath, { maxAge: "1y" }));
+
 // Load vendor files last.
 // The vendor's uv.config.js won't conflict with our uv.config.js inside the publicPath directory.
 app.use("/uv/", express.static(uvPath));
@@ -20,8 +26,6 @@ app.use((req, res) => {
   res.status(404);
   res.sendFile(join(publicPath, "404.html"));
 });
-
-const server = createServer();
 
 server.on("request", (req, res) => {
   if (bare.shouldRoute(req)) {
@@ -39,12 +43,12 @@ server.on("upgrade", (req, socket, head) => {
   }
 });
 
-let port = 80
+let port = 80;
 
 server.on("listening", () => {
   const address = server.address();
 
-  // by default we are listening on 0.0.0.0 (every interface)
+  // by default, we are listening on 0.0.0.0 (every interface)
   // we just need to list a few
   console.log("Listening on:");
   console.log(`\thttp://localhost:${address.port}`);
@@ -66,6 +70,4 @@ function shutdown() {
   bare.close();
 }
 
-server.listen({
-  port,
-});
+server.listen(port);

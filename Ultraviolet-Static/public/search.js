@@ -8,7 +8,7 @@
  */
 function search(input, template) {
   let url;
-  
+
   try {
     url = new URL(input);
     if (url.hostname.includes(".")) {

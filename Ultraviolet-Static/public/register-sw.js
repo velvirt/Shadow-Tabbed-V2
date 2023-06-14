@@ -3,21 +3,6 @@
 const stockSW = "/uv/sw.js";
 const isServiceWorkerSupported = 'serviceWorker' in navigator;
 
-async function registerSW() {
-  if (!isServiceWorkerSupported) {
-    throw new Error("Your browser doesn't support service workers.");
-  }
-
-  if (location.protocol === "https:" || isLocalhost()) {
-    // Ultraviolet has a stock `sw.js` script.
-    await navigator.serviceWorker.register(stockSW, {
-      scope: __uv$config.prefix,
-    });
-  } else {
-    throw new Error("Service workers cannot be registered without https.");
-  }
-}
-
 function isLocalhost() {
   return (
     location.hostname === "localhost" ||
@@ -25,3 +10,19 @@ function isLocalhost() {
     location.hostname.startsWith("192.168.")
   );
 }
+
+async function registerSW() {
+  if (!isServiceWorkerSupported) {
+    return Promise.reject(new Error("Your browser doesn't support service workers."));
+  }
+
+  if (location.protocol === "https:" || isLocalhost()) {
+    return navigator.serviceWorker.register(stockSW, {
+      scope: __uv$config.prefix,
+    });
+  } else {
+    return Promise.reject(new Error("Service workers cannot be registered without HTTPS."));
+  }
+}
+
+registerSW();
