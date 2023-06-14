@@ -70,4 +70,4 @@ function shutdown() {
   bare.close();
 }
 
-server.listen(3030);
+server.listen(port);
