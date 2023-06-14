@@ -4,6 +4,20 @@
   const stockSW = "/uv/sw.js";
   const isServiceWorkerSupported = 'serviceWorker' in navigator;
 
+  async function registerSW() {
+    if (!isServiceWorkerSupported) {
+      throw new Error("Your browser doesn't support service workers.");
+    }
+
+    if (location.protocol === "https:" || isLocalhost()) {
+      await navigator.serviceWorker.register(stockSW, {
+        scope: __uv$config.prefix,
+      });
+    } else {
+      throw new Error("Service workers cannot be registered without https.");
+    }
+  }
+
   function isLocalhost() {
     return (
       location.hostname === "localhost" ||
@@ -12,20 +26,5 @@
     );
   }
 
-  async function registerSW() {
-    if (!isServiceWorkerSupported) {
-      return Promise.reject(new Error("Your browser doesn't support service workers."));
-    }
-
-    if (location.protocol === "https:" || isLocalhost()) {
-      return navigator.serviceWorker.register(stockSW, {
-        scope: __uv$config.prefix,
-      });
-    } else {
-      return Promise.reject(new Error("Service workers cannot be registered without HTTPS."));
-    }
-  }
-
-  // Call the registerSW function after defining it
   registerSW();
 })();
