@@ -1,32 +1,38 @@
 "use strict";
 
 /**
+ * Checks if a string is a valid URL.
+ * @param {string} input The input string to validate.
+ * @returns {boolean} true if the input is a valid URL, false otherwise.
+ */
+function isValidURL(input) {
+  try {
+    new URL(input);
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+
+/**
  *
  * @param {string} input
  * @param {string} template Template for a search query.
  * @returns {string} Fully qualified URL
  */
 function search(input, template) {
-  let url;
+  const inputTrimmed = input.trim();
 
-  try {
-    url = new URL(input);
-    if (url.hostname.includes(".")) {
-      return url.toString();
-    }
-  } catch (err) {
-    // input was not a valid URL
+  // Check if the input is a valid URL
+  if (isValidURL(inputTrimmed)) {
+    return new URL(inputTrimmed).toString();
   }
 
-  try {
-    url = new URL(`http://${input}`);
-    if (url.hostname.includes(".")) {
-      return url.toString();
-    }
-  } catch (err) {
-    // input was not a valid URL
+  // Check if adding 'http://' makes it a valid URL
+  if (isValidURL(`http://${inputTrimmed}`)) {
+    return new URL(`http://${inputTrimmed}`).toString();
   }
 
   // Treat the input as a search query
-  return template.replace("%s", encodeURIComponent(input));
+  return template.replace("%s", encodeURIComponent(inputTrimmed));
 }
