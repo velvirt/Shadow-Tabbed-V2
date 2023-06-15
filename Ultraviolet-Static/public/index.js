@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const url = search(address.value, searchEngine.value);
     localStorage.setItem('site', __uv$config.prefix + __uv$config.encodeUrl(url));
-    location.href = "load.html";
+    location.href = "/load.html";
   });
 
   async function openURL(url) {
@@ -35,6 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     localStorage.setItem('site', __uv$config.prefix + __uv$config.encodeUrl(url));
-    location.href = "load.html";
+    location.href = "/load.html";
   }
 });
