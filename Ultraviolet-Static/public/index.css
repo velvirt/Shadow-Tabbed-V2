@@ -233,6 +233,8 @@ p {
   justify-content: center;
   margin-top: 10px;
   align-self: center;
+  position: relative;
+  z-index: 1;
 }
 
 .icon-container img {
@@ -245,4 +247,49 @@ p {
 
 .icon-container img:hover {
   transform: scale(1.1);
+}
+
+#suggestions-list {
+  list-style-type: none;
+  padding: 0;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  z-index: 9999;
+  border-radius: 5px;
+  background-color: #00669966;
+  align-items: center;
+  width: 25%;
+}
+
+
+.suggestion-item {
+  padding: 10px;
+  z-index: 9999;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  text-transform: capitalize;
+  margin-bottom: 5px;
+}
+
+.suggestion-item:hover {
+  background-color: rgba(0, 102, 153, 0.6);
+  box-shadow: none; /* remove the box-shadow property */
+  text-transform: capitalize;
+}
+
+.suggestion-item span {
+  color: #ffffff;
+  text-transform: capitalize;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+}
+
+.suggestion-item .suggestion-url {
+  color: #aaaaaa;
+  text-transform: capitalize;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
 }

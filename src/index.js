@@ -5,6 +5,7 @@ import { publicPath } from "ultraviolet-static";
 import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
 import { join } from "path";
 import { hostname } from "os";
+import cors from "cors";
 import createBareServer from "@tomphttp/bare-server-node";
 
 const bare = createBareServer("/bare/");
@@ -13,7 +14,7 @@ const server = createServer();
 
 // Enable compression
 app.use(compression());
-
+app.use(cors());
 // Load our publicPath first and prioritize it over UV.
 app.use(express.static(publicPath, { maxAge: "1y" }));
 
