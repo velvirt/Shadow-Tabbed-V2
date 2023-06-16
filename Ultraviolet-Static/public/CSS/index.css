@@ -12,6 +12,7 @@ html, body {
   left: 0;
   width: fit-content;
   height: 2.5%;
+  margin-top: 2.5%;
   border-bottom-style: solid;
   border-bottom-color: #232b39;
   border-bottom-width: 2px;
@@ -95,14 +96,14 @@ i {
 .tab-control {
   display: flex;
   background-color: #0a0d15;
-  padding: 5px;
+  padding: 4px;
   border-bottom-style: solid;
   border-bottom-width: 3px;
   border-bottom-color: #232b39;
   padding-right: 15px;
   height: 30px;
   padding-left: 15px;
-  margin-top: 2%;
+  top:0;
   overflow: hidden;
 }
 
@@ -164,7 +165,7 @@ i {
 
 #iframe-container iframe {
   position: absolute;
-  top: 9%;
+  top: 10%;
   overflow:scroll;
   left: 0;
   right: 0;

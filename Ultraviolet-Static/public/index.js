@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     await registerServiceWorker;
 
     const url = search(address.value, searchEngine.value);
-    location.href =  __uv$config.prefix + __uv$config.encodeUrl(url);
+    location.href = __uv$config.prefix + __uv$config.encodeUrl(url);
   });
 
   async function openURL(url) {
@@ -33,6 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
       url = "https://" + url;
     }
 
-    location.href =  __uv$config.prefix + __uv$config.encodeUrl(url);
+    location.href = __uv$config.prefix + __uv$config.encodeUrl(url);
   }
 });

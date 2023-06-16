@@ -21,6 +21,11 @@ tabsContainer.addEventListener('click', function(event) {
   }
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+  const homeTab = document.querySelector('.tab');
+  changeTab(homeTab);
+});
+
 function changeTab(selectedTab) {
   const tabs = tabsContainer.querySelectorAll('.tab');
 
@@ -33,10 +38,17 @@ function changeTab(selectedTab) {
     const iframe = tabIframeMap.get(tabId);
     showIframe(iframe);
   } else {
-    const iframeSrc = selectedTab.dataset.src || 'main.html';
-    const iframe = createIframe(iframeSrc);
-    tabIframeMap.set(tabId, iframe);
-    showIframe(iframe);
+    if (tabId === 'home') {
+      const iframeSrc = 'home.html';
+      const iframe = createIframe(iframeSrc);
+      tabIframeMap.set(tabId, iframe);
+      showIframe(iframe);
+    } else {
+      const iframeSrc = selectedTab.dataset.src || 'main.html';
+      const iframe = createIframe(iframeSrc);
+      tabIframeMap.set(tabId, iframe);
+      showIframe(iframe);
+    }
   }
 }
 
@@ -55,27 +67,6 @@ function showIframe(iframe) {
     iframe.style.display = 'none';
   });
   iframe.style.display = 'block';
-}
-
-function addTab() {
-  const tabManager = document.querySelector('.tab-manager');
-  const tabId = tabCounter++;
-
-  const newTab = document.createElement('div');
-  newTab.classList.add('tab');
-  newTab.dataset.tabId = tabId;
-  newTab.innerHTML = '<i class="fa-solid fa-table-columns fa-lg"></i>Tab';
-
-  const closeBtn = document.createElement('div');
-  closeBtn.classList.add('close-btn');
-  closeBtn.innerHTML = '<i class="fas fa-times"></i>';
-  newTab.appendChild(closeBtn);
-
-  tabManager.insertAdjacentElement('beforebegin', newTab);
-
-  const iframe = createIframe('');
-  iframe.dataset.tabId = tabId;
-  tabIframeMap.set(tabId, iframe);
 }
 
 function removeTab(tab) {
@@ -122,4 +113,23 @@ closeBtn.addEventListener('click', function() {
   }
 });
 
-addBtn.addEventListener('click', addTab);
+function addTab() {
+  const tabManager = document.querySelector('.tab-manager');
+  const tabId = tabCounter++;
+
+  const newTab = document.createElement('div');
+  newTab.classList.add('tab');
+  newTab.dataset.tabId = tabId;
+  newTab.innerHTML = '<i class="fa-solid fa-table-columns fa-lg"></i>Tab';
+
+  const closeBtn = document.createElement('div');
+  closeBtn.classList.add('close-btn');
+  closeBtn.innerHTML = '<i class="fas fa-times"></i>';
+  newTab.appendChild(closeBtn);
+
+  tabManager.insertAdjacentElement('beforebegin', newTab);
+
+  const iframe = createIframe('');
+  iframe.dataset.tabId = tabId;
+  tabIframeMap.set(tabId, iframe);
+}
