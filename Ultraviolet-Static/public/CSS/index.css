@@ -1,0 +1,175 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow:hidden;
+  background-color: #191c24;
+  color: #e5e5e5;
+}
+
+.control-row {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: fit-content;
+  height: 2.5%;
+  border-bottom-style: solid;
+  border-bottom-color: #232b39;
+  border-bottom-width: 2px;
+  display: flex;
+  padding: 7.5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  align-items: center;
+  background-color: #0a0d15;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+.url {
+  margin: 10px 10px;
+  border: none;
+  height: 20px;
+  background-color: #232b39;
+  align-self: center;
+  border-radius: 5px;
+  width: 80vmax;
+  color: #e5e5e5;
+  text-align: center;
+  padding: 5px;
+  font-size: 15px;
+  font-weight: 300;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.url::placeholder {
+  color: #a0a8b7;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.url:focus {
+  outline: none;
+}
+
+.url:focus::placeholder {
+  color: transparent;
+}
+
+.right-control-row {
+  display: flex;
+  padding-right: 50px;
+  align-items: center;
+}
+
+#right-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #232b39;
+  padding: 5px;
+  width: 22px;
+  height: 15px;
+  border-radius: 5px;
+  margin-right: 15px;
+}
+
+#right-control i {
+  margin-right: 1px;
+  color: #a0a8b7;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+i {
+  margin-right: 10px;
+  color: #a0a8b7;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab-control {
+  display: flex;
+  background-color: #0a0d15;
+  padding: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: #232b39;
+  padding-right: 15px;
+  height: 30px;
+  padding-left: 15px;
+  margin-top: 2%;
+  overflow: hidden;
+}
+
+.tab {
+  flex: 1;
+  padding-right: 15px;
+  font-family: 'Open Sans', sans-serif;
+  padding-left: 15px;
+  margin-top: 2px;
+  margin-right: 5px;
+  background-color: #232b39;
+  cursor: pointer;
+  text-align: center;
+  color: #e5e5e5;
+  border-radius: 5px;
+  height: 30px;
+  transition: background-color 0.3s ease;
+  max-width: 70px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.tab:hover {
+  background-color: #12202b;
+}
+
+.tab-manager {
+  margin-left: auto;
+  height: 80px;
+  margin-top: -5px;
+  border-left: 2px solid #232b39;
+  display: flex;
+  align-items: center;
+}
+
+.open-btn,
+.close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+  background-color: #232b39;
+  padding: 5px;
+  width: 25px;
+  border-radius: 5px;
+  text-align: center;
+  margin-left: 15px;
+}
+
+.open-btn i,
+.close-btn i {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a0a8b7;
+}
+
+#iframe-container iframe {
+  position: absolute;
+  top: 9%;
+  overflow:scroll;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: none;
+  width: 100vmax;
+  height: calc(100% - 30px); /* Adjust the height based on your tab control height */
+}

@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="googlebot" content="index, follow, snippet" />
     <link rel="shortcut icon" content="favicon.ico" />
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="CSS/index.css" />
     <script src="uv/uv.bundle.js" defer></script>
     <script src="uv/uv.config.js" defer></script>
     <script src="register-sw.js" defer></script>
@@ -17,162 +17,42 @@
     <link href="https://fonts.cdnfonts.com/css/blacklisted" rel="stylesheet">
     <script src="search.js" defer></script>
     <script src="index.js" defer></script>
+    <script src="tab.js" defer></script>
     <script type="application/ld+json">
     </script>
   </head>
-
   <body>
-    <div class="navbar">
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Games</a></li>
-        <li><a href="settings/">Settings</a></li>
-      </ul>
+    <div class="control-row">
+      <i class="fa-solid fa-expand fa-lg"></i>
+      <i class="fa-solid fa-arrow-left fa-lg"></i>
+      <i class="fa-sharp fa-solid fa-arrow-right fa-lg"></i>
+      <i class="fa-solid fa-rotate-right fa-lg"></i>
+      <input type="text" class="url" placeholder="Home" id="search-input">
+      <div class="right-control-row">
+        <div id="right-control" style="margin-left: 30%">
+          <i class="fa-brands fa-discord fa-lg"></i>
+        </div>
+        <div id="right-control">
+          <i class="fa-solid fa-arrow-up-right-from-square fa-lg"></i>
+        </div>
+        <div id="right-control">
+          <i class="fa-sharp fa-solid fa-gear fa-lg"></i>
+        </div>
+      </div>
     </div>
-  
-    <header>
-      <h1>Welcome to Shadow</h1>
-      <p>The Flagship proxy of Phantom Network</p>
-      <i class="fa-brands fa-github fa-xl"></i>
-      <i class="fa-brands fa-discord fa-xl" style="margin-left: 5px;"></i> <br>
-      <p id="ping-time"></p>
-    </header>
-    <form id="uv-form" class="flex-center">
-      <input style="z-index: -9999;"
-        id="uv-search-engine"
-        value=""
-        type="hidden"
-      />
-      <input id="uv-address" type="text" placeholder="Search the web freely" />
-    </form>
-    <ul id="suggestions-list" ></ul>
-
-    <div class="icon-container" > <br><br>
-      <img src="shortcuts/google_logo.png" onclick="openURL('google.com')" alt="Shortcut 1">
-      <img src="shortcuts/youtube.png" onclick="openURL('youtube.com')" style="width:60px" alt="Shortcut 2">
-      <img src="shortcuts/discord.png" onclick="openURL('discord.com/app')" style="height:30px; margin-top:0.5%;"  alt="Shortcut 2">
-      <img src="shortcuts/nowgg.png" onclick="openURL('now.gg')" style="width:65px; height:65px; margin-top:-0.45%"  alt="Shortcut 2">
+    <div class="tab-control">
+      <div class="tab active" onclick="changeTab(this)">
+        <i class="fa-solid fa-house fa-lg"></i>Home
+      </div>
+      <div class="tab-manager">
+        <div class="open-btn" onclick="openNewTab()"><i class="fas fa-plus"></i></div>
+        <div class="close-btn" id="closebtn"><i class="fas fa-times"></i></div>
+      </div>
     </div>
-    <div class="desc left-margin">
-      <p id="uv-error"></p>
-      <pre id="uv-error-code"></pre>
-    </div>
+    <div id="iframe-container"></div>
   </body>
-</html>
-
-<script>
-function calculatePing() {
-  var startTime = new Date().getTime();
-
-  navigator.sendBeacon('/ping', '');
-
-  var endTime = new Date().getTime();
-  var pingTime = endTime - startTime;
-  var statusElement = document.getElementById('ping-time');
-  statusElement.textContent = 'Ping: ' + pingTime + ' ms';
-}
-
-window.addEventListener('load', function() {
-  calculatePing(); // Measure the ping when the website loads
-  setInterval(calculatePing, 1000/10); // Update every 5 seconds
-});
-
-</script>
-
-
-<script>
-// Retrieve the search engine value from local storage
-var searchEngineValue = localStorage.getItem("searchengine");
-
-// Set the default value if no search engine value is found
-if (!searchEngineValue) {
-  searchEngineValue = "https://www.google.com/search?q=%s";
-}
-// Set the value of the input field
-document.getElementById("uv-search-engine").value = searchEngineValue;
-
-</script>
-
-<script>
-  function openNewTab() {
-    const currentURL = window.location.href;
-    const newTab = window.open('about:blank', '_blank');
-    newTab.document.write('<html><body style="margin: 0; padding: 0;"><embed src="' + currentURL + '" style="width: 100%; height: 100%;"></embed></body></html>');
-    newTab.document.close();
-  }
-  
-  function openNewWindow() {
-    const currentURL = window.location.href;
-    const newWindow = window.open('about:blank', '_blank', 'width=800,height=600');
-    newWindow.document.write('<html><body style="margin: 0; padding: 0;"><embed src="' + currentURL + '" style="width: 100%; height: 100%;"></embed></body></html>');
-    newWindow.document.close();
-  }
-  
-</script>
+  </html>
 
 <script src="settings/js/index.js"></script>
 <script src="settings/js/settings.js"></script>
 <script src="settings/js/panic.js"></script>
-<script src="suggestions.js"></script>
-
-
-<script>
-  const addressInput = document.getElementById('uv-address');
-  const suggestionsList = document.getElementById('suggestions-list');
-  let timeoutId;
-
-  addressInput.addEventListener('input', handleInput);
-
-  function handleInput(event) {
-    const searchTerm = event.target.value.trim();
-
-    if (searchTerm.length > 0) {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        getSuggestions(searchTerm)
-          .then(renderSuggestions)
-          .catch(console.error);
-      }, 300);
-    } else {
-      clearSuggestions();
-    }
-  }
-
-  function getSuggestions(query) {
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/'; // Proxy server URL
-    const url = `https://duckduckgo.com/ac/search?q=${encodeURIComponent(query)}`;
-    return fetch(proxyUrl + url)
-      .then(response => response.json())
-      .then(data => data.map(item => item.phrase));
-  }
-
-  function renderSuggestions(suggestions) {
-    clearSuggestions();
-
-    suggestions.slice(0, 5).forEach(suggestion => { // Limit to the first 5 suggestions
-      const suggestionItem = document.createElement('li');
-      suggestionItem.classList.add('suggestion-item');
-      suggestionItem.textContent = suggestion;
-      suggestionItem.addEventListener('click', () => {
-        addressInput.value = suggestion;
-        clearSuggestions();
-        performSearch();
-      });
-
-      suggestionsList.appendChild(suggestionItem);
-    });
-  }
-
-  function clearSuggestions() {
-    suggestionsList.innerHTML = '';
-  }
-
-  function performSearch() {
-    const searchTerm = addressInput.value.trim();
-    // Add your code to perform the search using the search term
-    console.log(`Performing search for: ${searchTerm}`);
-  }
-
-
-</script>

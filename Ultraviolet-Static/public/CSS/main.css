@@ -1,0 +1,79 @@
+body {
+    background-color: #1a1a32;
+    margin: 0;
+    padding:0;
+    font-family: Arial, sans-serif;
+  }
+  
+  header {
+    background-color: #1a1a32;
+    padding: 10px;
+    margin-top: 10.5%;
+    z-index:-1000;
+    text-align: center;
+  }
+  
+  .heading {
+    font-size: 70px;
+    margin-top: 10.5%;
+    color: #ffffff;
+    margin: 20px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:-15.5%;
+    justify-content: center;
+    height: 80vh;
+  }
+  
+  #uv-address {
+    border: 1px solid #383858;
+    border-radius: 24px;
+    height: 36px;
+    width: 500px;
+    padding: 6px 12px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    background-color: #212139;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    color: #ffffff;
+  }
+  
+  .shortcuts {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .shortcuts a {
+    text-decoration: none;
+    color: #ffffff;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    padding:5px;
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .shortcuts a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-5px);
+  }
+  
+  .shortcuts img {
+    width: auto;
+    height: 50px;
+    margin-bottom: 5px;
+  }
+  
+  .shortcuts span {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
