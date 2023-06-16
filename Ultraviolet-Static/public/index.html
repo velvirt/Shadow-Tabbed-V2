@@ -23,23 +23,30 @@
   </head>
   <body>
     <div class="control-row">
-      <i class="fa-solid fa-expand fa-lg"></i>
-      <i class="fa-solid fa-arrow-left fa-lg"></i>
-      <i class="fa-sharp fa-solid fa-arrow-right fa-lg"></i>
-      <i class="fa-solid fa-rotate-right fa-lg"></i>
+      <!-- Controls  on Left of Web Input-->
+      <i class="fa-solid fa-expand fa-lg" id="full-btn"></i>
+      <i class="fa-solid fa-arrow-left fa-lg" id="back"></i>
+      <i class="fa-sharp fa-solid fa-arrow-right fa-lg" id="forward"></i>
+      <i class="fa-solid fa-rotate-right fa-lg" id="reload"></i>
+      <!--- Web Input -->
       <input type="text" class="url" placeholder="Home" id="search-input">
+      <!-- Controls on Right of Web Input-->
       <div class="right-control-row">
+        <!--- Discord -->
         <div id="right-control" style="margin-left: -4%">
-          <i class="fa-brands fa-discord fa-lg"></i>
+          <i class="fa-brands fa-discord fa-lg" id="discord"></i>
         </div>
+        <!--- Open Iframe in Another Tab -->
         <div id="right-control">
-          <i class="fa-solid fa-arrow-up-right-from-square fa-lg"></i>
+          <i class="fa-solid fa-arrow-up-right-from-square fa-lg" id=""></i>
         </div>
+        <!---Settings -->
         <div id="right-control">
           <i class="fa-sharp fa-solid fa-gear fa-lg"></i>
         </div>
       </div>
     </div>
+    <!-- Tab Controls-->
     <div class="tab-control">
       <div class="tab active" onclick="changeTab(this)" data-src="home.html">
         <i class="fa-solid fa-house fa-lg"></i>Home
@@ -49,6 +56,7 @@
         <div class="close-btn" id="closebtn"><i class="fas fa-times"></i></div>
       </div>
     </div>
+    <!-- Iframe Container-->
     <div id="iframe-container"></div>
   
   </body>

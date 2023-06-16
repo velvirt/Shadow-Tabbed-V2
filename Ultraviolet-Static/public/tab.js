@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
   changeTab(homeTab);
 });
 
-function changeTab(selectedTab) {
+function changeTab(selectedTab, src) {
   const tabs = tabsContainer.querySelectorAll('.tab');
 
   tabs.forEach(tab => tab.classList.remove('active'));
@@ -38,19 +38,22 @@ function changeTab(selectedTab) {
     const iframe = tabIframeMap.get(tabId);
     showIframe(iframe);
   } else {
-    if (tabId === 'home') {
-      const iframeSrc = 'home.html';
-      const iframe = createIframe(iframeSrc);
-      tabIframeMap.set(tabId, iframe);
-      showIframe(iframe);
+    let iframeSrc;
+    if (src) {
+      iframeSrc = src;
+    } else if (tabId === 'home') {
+      iframeSrc = 'home.html';
     } else {
-      const iframeSrc = selectedTab.dataset.src || 'main.html';
-      const iframe = createIframe(iframeSrc);
-      tabIframeMap.set(tabId, iframe);
-      showIframe(iframe);
+      iframeSrc = selectedTab.dataset.src || 'main.html';
     }
+
+    const iframe = createIframe(iframeSrc);
+    tabIframeMap.set(tabId, iframe);
+    showIframe(iframe);
   }
 }
+
+
 
 function createIframe(src) {
   const iframe = document.createElement('iframe');
@@ -134,4 +137,52 @@ function addTab() {
   tabIframeMap.set(tabId, iframe);
 }
 
+
+
+const fullBtn = document.getElementById('full-btn');
+fullBtn.addEventListener('click', function() {
+  const activeIframe = iframeContainer.querySelector('iframe:not([style*="display: none"])');
+  if (activeIframe) {
+    if (activeIframe.requestFullscreen) {
+      activeIframe.requestFullscreen();
+    } else if (activeIframe.mozRequestFullScreen) {
+      activeIframe.mozRequestFullScreen();
+    } else if (activeIframe.webkitRequestFullscreen) {
+      activeIframe.webkitRequestFullscreen();
+    } else if (activeIframe.msRequestFullscreen) {
+      activeIframe.msRequestFullscreen();
+    }
+  }
+});
+
+const forwardbtn = document.getElementById('forward');
+forwardbtn.addEventListener('click', function() {
+  const activeIframe = iframeContainer.querySelector('iframe:not([style*="display: none"])');
+  if (activeIframe && activeIframe.contentWindow) {
+    activeIframe.contentWindow.history.forward();
+  }
+});
+
+const backbtn = document.getElementById('back');
+backbtn.addEventListener('click', function() {
+  const activeIframe = iframeContainer.querySelector('iframe:not([style*="display: none"])');
+  if (activeIframe && activeIframe.contentWindow) {
+    activeIframe.contentWindow.history.back();
+  }
+});
+
+const reloadbtn = document.getElementById('reload');
+reloadbtn.addEventListener('click', function() {
+  const activeIframe = iframeContainer.querySelector('iframe:not([style*="display: none"])');
+  if (activeIframe) {
+    activeIframe.src = activeIframe.src;
+  }
+});
+
+const discordbtn = document.getElementById('discord');
+discordbtn.addEventListener('click', function() {
+  addTab();
+  const newTab = tabsContainer.querySelector('.tab[data-tab-id="' + (tabCounter - 1) + '"]');
+  changeTab(newTab, '/uv/service/hvtrs8%2F-dksaopd%2Ccmm-ilvktg%2Fr9j3fTJAOA');
+});
 
