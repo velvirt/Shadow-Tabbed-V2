@@ -12,7 +12,7 @@ const bare = createBareServer("/bare/");
 const app = express();
 const server = createServer();
 
-// Enable compression
+// Enable compression2
 app.use(compression());
 app.use(cors());
 // Load our publicPath first and prioritize it over UV.
