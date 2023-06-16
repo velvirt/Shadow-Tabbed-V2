@@ -11,6 +11,13 @@ document.addEventListener("DOMContentLoaded", () => {
     throw err;
   });
 
+  const handleClick = async (urlValue) => {
+    await registerServiceWorker;
+  
+    const url = search(urlValue, searchEngine.value);
+    location.href = __uv$config.prefix + __uv$config.encodeUrl(url);
+  };
+  
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -20,19 +27,10 @@ document.addEventListener("DOMContentLoaded", () => {
     location.href = __uv$config.prefix + __uv$config.encodeUrl(url);
   });
 
-  async function openURL(url) {
-    try {
-      await registerServiceWorker;
-    } catch (err) {
-      error.textContent = "Failed to register service worker.";
-      errorCode.textContent = err.toString();
-      // Handle the error gracefully, no need to re-throw
-    }
-
-    if (!url.startsWith("https://") && !url.startsWith("http://")) {
-      url = "https://" + url;
-    }
-
-    location.href = __uv$config.prefix + __uv$config.encodeUrl(url);
-  }
+  // Add event listener to the button or element you want to trigger the same behavior
+  const button = document.getElementById("discord");
+  button.addEventListener("click", async (event) => {
+    event.preventDefault();
+    await handleClick("discord.com");
+  });
 });
