@@ -29,11 +29,14 @@
       <i class="fa-sharp fa-solid fa-arrow-right fa-lg" id="forward"></i>
       <i class="fa-solid fa-rotate-right fa-lg" id="reload"></i>
       <!--- Web Input -->
-      <input type="text" class="url" placeholder="Home" id="search-input">
+      <form id="uv-form">
+        <input style="z-index: -9999;" id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"/>
+        <input type="text" class="url" placeholder="Home" id="uv-address">
+      </form>
       <!-- Controls on Right of Web Input-->
       <div class="right-control-row">
         <!--- Discord -->
-        <div id="right-control" style="margin-left: -4%">
+        <div id="right-control" style="margin-left: 4%">
           <i class="fa-brands fa-discord fa-lg" id="discord"></i>
         </div>
         <!--- Open Iframe in Another Tab -->
