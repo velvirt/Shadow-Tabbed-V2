@@ -193,7 +193,7 @@ discordbtn.addEventListener('click', function() {
 });
 
 const openiframebtn = document.getElementById('openiframe');
-openIframeBtn.addEventListener('click', function() {
+openiframebtn.addEventListener('click', function() {
   const activeTab = tabsContainer.querySelector('.tab.active');
   if (activeTab) {
     const tabId = activeTab.dataset.tabId;
@@ -201,6 +201,13 @@ openIframeBtn.addEventListener('click', function() {
     const iframeSrc = iframe.getAttribute('src');
     window.open(iframeSrc, '_blank');
   }
+});
+
+const settingsbtn = document.getElementById('settings');
+settingsbtn.addEventListener('click', function() {
+  addTab();
+  const newTab = tabsContainer.querySelector('.tab[data-tab-id="' + (tabCounter - 1) + '"]');
+  changeTab(newTab, '/settings/');
 });
 
 
