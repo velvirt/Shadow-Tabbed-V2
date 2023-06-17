@@ -71,4 +71,4 @@ function shutdown() {
   bare.close();
 }
 
-server.listen(5050);
+server.listen(80);
