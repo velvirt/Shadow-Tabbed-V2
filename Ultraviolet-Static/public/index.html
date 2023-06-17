@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="CSS/index.css" />
     <script src="uv/uv.bundle.js" defer></script>
     <script src="uv/uv.config.js" defer></script>
+    <title>Shadow Browser</title>
     <script src="register-sw.js" defer></script>
     <link rel="icon" type="image/png"  href="/favicon/favicon-32x32.png">
     <link href="https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap" rel="stylesheet">
@@ -68,3 +69,39 @@
 <script src="settings/js/index.js"></script>
 <script src="settings/js/settings.js"></script>
 <script src="settings/js/panic.js"></script>
+
+
+<script>
+  // Function to check if the Title or Favicon has changed
+function checkUpdates() {
+  var tab = localStorage.getItem("tab");
+
+  if (tab) {
+    // If there is saved data, try to parse it
+    try {
+      var tabData = JSON.parse(tab);
+    } catch {
+      // If there is an error in parsing, create an empty object
+      var tabData = {};
+    }
+  } else {
+    // If there is no saved data, create an empty object
+    var tabData = {};
+  }
+
+  var currentTitle = document.title;
+  var currentFavicon = document.querySelector("link[rel='icon']").href;
+
+  if (tabData.title && tabData.title !== currentTitle) {
+    document.title = tabData.title;
+  }
+
+  if (tabData.icon && tabData.icon !== currentFavicon) {
+    document.querySelector("link[rel='icon']").href = tabData.icon;
+  }
+}
+
+// Check for updates every 5 seconds
+setInterval(checkUpdates, 1000);
+
+</script>

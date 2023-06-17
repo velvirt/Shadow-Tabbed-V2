@@ -164,5 +164,13 @@ function resetTab() {
   document.querySelector("link[rel='icon']").href = settingsDefaultTab.icon;
   document.getElementById("title").value = "";
   document.getElementById("icon").value = "";
-  localStorage.setItem("tab", JSON.stringify({}));
+  
+  // Update the saved tab data with the default values
+  var tabData = {
+    title: settingsDefaultTab.title,
+    icon: settingsDefaultTab.icon
+  };
+
+  // Save the updated tab data to localStorage
+  localStorage.setItem("tab", JSON.stringify(tabData));
 }
