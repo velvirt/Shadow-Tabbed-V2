@@ -192,6 +192,16 @@ discordbtn.addEventListener('click', function() {
   changeTab(newTab, '/uv/service/hvtrs8%2F-dksaopd%2Ccmm-ilvktg%2Fr9j3fTJAOA');
 });
 
+const openiframebtn = document.getElementById('openiframe');
+openIframeBtn.addEventListener('click', function() {
+  const activeTab = tabsContainer.querySelector('.tab.active');
+  if (activeTab) {
+    const tabId = activeTab.dataset.tabId;
+    const iframe = tabIframeMap.get(tabId);
+    const iframeSrc = iframe.getAttribute('src');
+    window.open(iframeSrc, '_blank');
+  }
+});
 
 
 // Proxy Managing :)
