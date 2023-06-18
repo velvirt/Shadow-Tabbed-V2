@@ -28,7 +28,7 @@
 
     <div class="search-container">
       <form id="uv-form" class="flex-center">
-        <input style="z-index: -9999;" id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"/>
+        <input style="z-index: -9999;" id="uv-search-engine" value="" type="hidden"/>
         <input id="uv-address" type="text" placeholder="Search the web" autofocus/>
       </form>
 
@@ -77,3 +77,11 @@
     </div>
   </body>
 </html>
+
+<script>
+  var searchEngineValue = localStorage.getItem("searchengine");
+    if (!searchEngineValue) {
+    searchEngineValue = "https://www.google.com/search?q=%s";
+  }
+  document.getElementById("uv-search-engine").value = searchEngineValue;
+  </script>

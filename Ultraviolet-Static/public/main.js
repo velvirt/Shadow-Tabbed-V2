@@ -11,6 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
       throw err;
     });
 
+    window.addEventListener('load', async () => {
+        await registerServiceWorker();
+      });
+
+
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       await registerServiceWorker;

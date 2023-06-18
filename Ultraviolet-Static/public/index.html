@@ -31,7 +31,7 @@
       <i class="fa-solid fa-rotate-right fa-lg" id="reload"></i>
       <!--- Web Input -->
       <form id="uv-form">
-        <input style="z-index: -9999;" id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"/>
+        <input style="z-index: -9999;" id="uv-search-engine" value="" type="hidden"/>
         <input type="text" class="url" placeholder="Enter URL" id="uv-address">
       </form>
       <!-- Controls on Right of Web Input-->
@@ -72,20 +72,16 @@
 
 
 <script>
-  // Function to check if the Title or Favicon has changed
 function checkUpdates() {
   var tab = localStorage.getItem("tab");
 
   if (tab) {
-    // If there is saved data, try to parse it
     try {
       var tabData = JSON.parse(tab);
     } catch {
-      // If there is an error in parsing, create an empty object
       var tabData = {};
     }
   } else {
-    // If there is no saved data, create an empty object
     var tabData = {};
   }
 
@@ -105,3 +101,11 @@ function checkUpdates() {
 setInterval(checkUpdates, 1000);
 
 </script>
+
+<script>
+  var searchEngineValue = localStorage.getItem("searchengine");
+    if (!searchEngineValue) {
+    searchEngineValue = "https://www.google.com/search?q=%s";
+  }
+  document.getElementById("uv-search-engine").value = searchEngineValue;
+  </script>

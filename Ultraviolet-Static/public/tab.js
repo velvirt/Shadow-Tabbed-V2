@@ -239,4 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+window.addEventListener('load', async () => {
+  await registerServiceWorker();
+});
 
