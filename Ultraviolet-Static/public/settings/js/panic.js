@@ -29,7 +29,7 @@ function redirectToWebsite() {
         if (!url.startsWith('http://') && !url.startsWith('https://')) {
           url = 'http://' + url;
         }
-        window.location.href = url;
+        window.location.origin = url;
       }
     });
   }

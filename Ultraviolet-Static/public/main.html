@@ -23,15 +23,18 @@
   </head>
   <body>
     <header>
-      <h1 class="heading">Shadow</h1>
-    </header> <br> <br>
+      <h1 class="heading" style="padding-bottom: 0;">Shadow</h1>
+      <p id="ping-time" style=" color:white; margin-top: -1%; text-align: center;"></p>
+    </header>
+    <br><br>
+
 
     <div class="search-container">
       <form id="uv-form" class="flex-center">
         <input style="z-index: -9999;" id="uv-search-engine" value="" type="hidden"/>
         <input id="uv-address" type="text" placeholder="Search the web" autofocus/>
       </form>
-
+      <ul id="suggestions-list" ></ul>
       <div class="shortcuts">
         <a id="discord" >
           <img src="shortcuts/discord.jpg" alt="" />
@@ -85,3 +88,84 @@
   }
   document.getElementById("uv-search-engine").value = searchEngineValue;
   </script>
+
+<script src="js/panic.js"></script>
+
+<script>
+  function calculatePing() {
+    var startTime = new Date().getTime();
+  
+    navigator.sendBeacon('/ping', '');
+  
+    var endTime = new Date().getTime();
+    var pingTime = endTime - startTime;
+    var statusElement = document.getElementById('ping-time');
+    statusElement.textContent = 'Ping: ' + pingTime + ' ms';
+  }
+  
+  window.addEventListener('load', function() {
+    calculatePing(); // Measure the ping when the website loads
+    setInterval(calculatePing, 1000/10); // Update every 5 seconds
+  });
+  
+  </script>
+
+<script>
+  const addressInput = document.getElementById('uv-address');
+  const suggestionsList = document.getElementById('suggestions-list');
+  let timeoutId;
+
+  addressInput.addEventListener('input', handleInput);
+
+  function handleInput(event) {
+    const searchTerm = event.target.value.trim();
+
+    if (searchTerm.length > 0) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        getSuggestions(searchTerm)
+          .then(renderSuggestions)
+          .catch(console.error);
+      }, 300);
+    } else {
+      clearSuggestions();
+    }
+  }
+
+  function getSuggestions(query) {
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/'; // Proxy server URL
+    const url = `https://duckduckgo.com/ac/search?q=${encodeURIComponent(query)}`;
+    return fetch(proxyUrl + url)
+      .then(response => response.json())
+      .then(data => data.map(item => item.phrase));
+  }
+
+  function renderSuggestions(suggestions) {
+    clearSuggestions();
+
+    suggestions.slice(0, 5).forEach(suggestion => { // Limit to the first 5 suggestions
+      const suggestionItem = document.createElement('li');
+      suggestionItem.classList.add('suggestion-item');
+      suggestionItem.textContent = suggestion;
+      suggestionItem.addEventListener('click', () => {
+        addressInput.value = suggestion;
+        clearSuggestions();
+        performSearch();
+      });
+
+      suggestionsList.appendChild(suggestionItem);
+    });
+  }
+
+  function clearSuggestions() {
+    suggestionsList.innerHTML = '';
+  }
+
+  function performSearch() {
+    const searchTerm = addressInput.value.trim();
+    // Add your code to perform the search using the search term
+    console.log(`Performing search for: ${searchTerm}`);
+  }
+
+
+</script>
