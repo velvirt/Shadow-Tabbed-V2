@@ -112,10 +112,9 @@ function removeTab(tab) {
 closeBtn.addEventListener('click', function() {
   const activeTab = tabsContainer.querySelector('.tab.active');
   const tabs = tabsContainer.querySelectorAll('.tab');
-
   if (tabs.length === 1) {
     return;
-  }
+  }   
 
   if (activeTab) {
     removeTab(activeTab);
@@ -129,13 +128,7 @@ function addTab() {
   const newTab = document.createElement('div');
   newTab.classList.add('tab');
   newTab.dataset.tabId = tabId;
-  newTab.innerHTML = '<i class="fa-solid fa-table-columns fa-lg"></i>Tab';
-
-  const closeBtn = document.createElement('div');
-  closeBtn.classList.add('close-btn');
-  closeBtn.innerHTML = '<i class="fas fa-times"></i>';
-  newTab.appendChild(closeBtn);
-
+  newTab.innerHTML = '<i class="fa-solid fa-table-columns fa-lg"></i> New Tab';
   tabManager.insertAdjacentElement('beforebegin', newTab);
 
   const iframe = createIframe('');
@@ -143,7 +136,18 @@ function addTab() {
   tabIframeMap.set(tabId, iframe);
 }
 
-
+  function closebutton(){
+      const activeTab = tabsContainer.querySelector('.tab.active');
+      const tabs = tabsContainer.querySelectorAll('.tab');
+    
+      if (tabs.length === 1) {
+        return;
+      }
+    
+      if (activeTab) {
+        removeTab(activeTab);
+      }
+  }
 
 const fullBtn = document.getElementById('full-btn');
 fullBtn.addEventListener('click', function() {
@@ -208,38 +212,5 @@ settingsbtn.addEventListener('click', function() {
   addTab();
   const newTab = tabsContainer.querySelector('.tab[data-tab-id="' + (tabCounter - 1) + '"]');
   changeTab(newTab, '/settings/');
-});
-
-
-// Proxy Managing :)
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("uv-form");
-  const address = document.getElementById("uv-address");
-  const searchEngine = document.getElementById("uv-search-engine");
-  const error = document.getElementById("uv-error");
-  const errorCode = document.getElementById("uv-error-code");
-
-  const registerServiceWorker = registerSW().catch((err) => {
-    error.textContent = "Failed to register service worker.";
-    errorCode.textContent = err.toString();
-    throw err;
-  });
-
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    await registerServiceWorker;
-
-    const url = search(address.value, searchEngine.value);
-    const activeTab = tabsContainer.querySelector('.tab.active');
-    if (activeTab) {
-      const tabId = activeTab.dataset.tabId;
-      const iframe = tabIframeMap.get(tabId);
-      iframe.setAttribute('src', __uv$config.prefix + __uv$config.encodeUrl(url));
-    }
-  });
-});
-
-window.addEventListener('load', async () => {
-  await registerServiceWorker();
 });
 

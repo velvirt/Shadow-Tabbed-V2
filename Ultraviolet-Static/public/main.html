@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="CSS/main.css" />
     <script src="uv/uv.bundle.js" defer></script>
     <script src="uv/uv.config.js" defer></script>
+    <script src="tab.js"> </script>
     <script src="register-sw.js" defer></script>
     <link rel="icon" type="image/png" href="/favicon/favicon-32x32.png" />
     <link href="https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap" rel="stylesheet"/>
@@ -19,13 +20,14 @@
     <script src="search.js" defer></script>
     <script src="main.js" defer></script>
     <script type="application/ld+json"></script>
-    <title>Shadow</title>
+    <title>New Tab</title>
   </head>
   <body>
     <header>
       <h1 class="heading" style="padding-bottom: 0;">Shadow</h1>
       <p id="ping-time" style=" color:white; margin-top: -1%; text-align: center;"></p>
       <ul id="suggestions-list"></ul>
+
     </header>
     <br><br>
 
@@ -133,9 +135,9 @@
   }
 
   function getSuggestions(query) {
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/'; // Proxy server URL
-    const url = `https://duckduckgo.com/ac/search?q=${encodeURIComponent(query)}`;
-    return fetch(proxyUrl + url)
+    const proxyUrl = 'https://acidichighqueries.nccoder1.repl.co/proxy?url=';
+    const url = `https://duckduckgo.com/ac/?q=${encodeURIComponent(query)}`;
+    return fetch(proxyUrl + encodeURIComponent(url))
       .then(response => response.json())
       .then(data => data.map(item => item.phrase));
   }
@@ -166,7 +168,5 @@
     // Add your code to perform the search using the search term
     console.log(`Performing search for: ${searchTerm}`);
   }
-
-
 </script>
 

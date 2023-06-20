@@ -13,11 +13,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Exo+2&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/blacklisted" rel="stylesheet">
     <script src="search.js" defer></script>
-    <script src="index.js" defer></script>
     <script src="tab.js" defer></script>
     <script type="application/ld+json">
     </script>
@@ -34,7 +34,8 @@
         <input style="z-index: -9999;" id="uv-search-engine" value="" type="hidden"/>
         <input type="text" class="url" placeholder="Enter URL" id="uv-address">
       </form>
-      <!-- Controls on Right of Web Input-->
+      <ul id="suggestions-list"></ul>
+        <!-- Controls on Right of Web Input-->
       <div class="right-control-row">
         <!--- Discord -->
         <div id="right-control" style="margin-left: 4%">
@@ -49,20 +50,20 @@
           <i class="fa-sharp fa-solid fa-gear fa-lg" id="settings"></i>
         </div>
       </div>
-    </div>
-    <!-- Tab Controls-->
-    <div class="tab-control">
-      <div class="tab active" onclick="changeTab(this)" data-src="home.html">
-        <i class="fa-solid fa-house fa-lg"></i>Home
-      </div>
-      <div class="tab-manager">
-        <div class="open-btn" onclick="addTab()"><i class="fas fa-plus"></i></div>
-        <div class="close-btn" id="closebtn"><i class="fas fa-times"></i></div>
-      </div>
-    </div>
+    </div>  
+
+ <!-- Tab Controls-->
+ <div class="tab-control">
+  <div class="tab active" onclick="changeTab(this)" data-src="home.html">
+    <i class="fa-solid fa-house fa-lg"></i>Home
+  </div>
+  <div class="tab-manager">
+    <div class="open-btn" onclick="addTab()"><i class="fas fa-plus"></i></div>
+  </div>
+</div>
+
     <!-- Iframe Container-->
-    <div id="iframe-container"></div>
-  
+    <div id="iframe-container" ></div>
   </body>
   </html>
 
@@ -109,3 +110,188 @@ setInterval(checkUpdates, 1000);
   }
   document.getElementById("uv-search-engine").value = searchEngineValue;
   </script>
+
+
+<script>
+  const addressInput = document.getElementById('uv-address');
+const suggestionsList = document.getElementById('suggestions-list');
+let timeoutId;
+
+addressInput.addEventListener('input', handleInput);
+addressInput.addEventListener('keydown', handleKeyDown);
+document.addEventListener('click', handleClickOutsideSuggestions);
+
+function handleInput(event) {
+  const searchTerm = event.target.value.trim();
+
+  if (searchTerm.length > 0) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      getSuggestions(searchTerm)
+        .then(renderSuggestions)
+        .catch(console.error);
+    }, 300);
+  } else {
+    clearSuggestions();
+  }
+}
+
+function clearSuggestions() {
+  suggestionsList.innerHTML = '';
+}
+
+function getSuggestions(query) {
+  const proxyUrl = 'https://acidichighqueries.nccoder1.repl.co/proxy?url=';
+  const url = `https://duckduckgo.com/ac/?q=${encodeURIComponent(query)}`;
+  return fetch(proxyUrl + encodeURIComponent(url))
+    .then(response => response.json())
+    .then(data => data.map(item => item.phrase));
+}
+
+function renderSuggestions(suggestions) {
+  clearSuggestions();
+
+  suggestions.slice(0, 4).forEach(suggestion => { // Limit to the first 4 suggestions
+    const suggestionItem = document.createElement('li');
+    suggestionItem.classList.add('suggestion-item');
+    suggestionItem.innerHTML = `<i class="fa-sharp fa-solid fa-magnifying-glass"></i> ${suggestion}`;
+    suggestionItem.addEventListener('click', () => {
+      addressInput.value = suggestion;
+      clearSuggestions();
+      performSearch();
+    });
+
+    suggestionsList.appendChild(suggestionItem);
+  });
+}
+
+function performSearch() {
+  const searchTerm = addressInput.value.trim();
+  // Add your code to perform the search using the search term
+  console.log(`Performing search for: ${searchTerm}`);
+}
+
+function handleClickOutsideSuggestions(event) {
+  if (!suggestionsList.contains(event.target) && event.target !== addressInput) {
+    clearSuggestions();
+  }
+}
+
+function handleKeyDown(event) {
+  if (event.key === 'Enter') {
+    clearSuggestions();
+  }
+}
+
+function handleClick(event) {
+  if (!suggestionsList.contains(event.target) && event.target !== addressInput) {
+    clearSuggestions();
+  }
+}
+
+addressInput.addEventListener('keydown', handleKeyDown);
+document.addEventListener('click', handleClick);
+
+
+</script>
+
+<script>
+let previousActiveTab = null;
+
+setInterval(function() {
+  const activeTab = tabsContainer.querySelector('.tab.active');
+
+  if (activeTab !== previousActiveTab) {
+    if (previousActiveTab) {
+      const closeBtn = previousActiveTab.querySelector('.close-btn');
+      if (closeBtn) {
+        closeBtn.remove();
+      }
+    }
+
+    if (activeTab && activeTab.dataset.src !== 'home.html') {
+      const closeBtn = document.createElement('div');
+      closeBtn.classList.add('close-btn-tab');
+      closeBtn.innerHTML = '<div onclick="closebutton(event)"><i class="fas fa-times"></i></div>';
+      activeTab.appendChild(closeBtn);
+    }
+
+    previousActiveTab = activeTab;
+  }
+}, 1);
+</script>
+
+
+<script>
+    var searchEngineValue = localStorage.getItem("searchengine");
+    if (!searchEngineValue) {
+    searchEngineValue = "https://www.google.com/search?q=%s";
+  }
+  document.getElementById("uv-search-engine").value = searchEngineValue;
+  </script>
+
+<script>
+  document.addEventListener('keydown', function(event) {
+    if ((event.altKey || event.metaKey) && event.key === 't') {
+      event.preventDefault();
+      addTab();
+    } else if ((event.altKey || event.metaKey) && event.key === 'w') {
+      event.preventDefault(); 
+      const activeTab = tabsContainer.querySelector('.tab.active');
+      const tabs = tabsContainer.querySelectorAll('.tab');
+    
+      if (tabs.length === 1) {
+        return;
+      }
+    
+      if (activeTab) {
+        removeTab(activeTab);
+      }
+    } else if ((event.altKey || event.metaKey) && event.key === 'i') {
+      event.preventDefault();
+      // Add your code here to perform the desired action
+    } else if ((event.altKey || event.metaKey) && event.key === 'u') {
+      event.preventDefault(); 
+      var fullsrc = 'view-source:' + window.location.href;
+      window.open(fullsrc, '_blank');
+    }
+  });
+</script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("uv-form");
+  const address = document.getElementById("uv-address");
+  const searchEngine = document.getElementById("uv-search-engine");
+  const error = document.getElementById("uv-error");
+  const errorCode = document.getElementById("uv-error-code");
+
+  const registerServiceWorker = registerSW().catch((err) => {
+    error.textContent = "Failed to register service worker.";
+    errorCode.textContent = err.toString();
+    throw err;
+  });
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    await registerServiceWorker;
+
+    const url = search(address.value, searchEngine.value);
+    const activeTab = tabsContainer.querySelector('.tab.active');
+    if (activeTab) {
+      const tabId = activeTab.dataset.tabId;
+      const iframe = tabIframeMap.get(tabId);
+      iframe.setAttribute('src', __uv$config.prefix + __uv$config.encodeUrl(url));
+    }   
+  });
+});
+
+document.addEventListener('keydown', function(event) {
+  if ((event.ctrlKey || event.metaKey) && (event.key === 't' || event.key === 'w')) {
+    event.preventDefault();
+  }
+});
+
+
+</script>
