@@ -37,7 +37,7 @@ html, body {
   background-color: #232b39;
   align-self: center;
   border-radius: 5px;
-  width: 82.5vmax;
+  width: 79.5vmax;
   color: #e5e5e5;
   text-align: center;
   padding: 5px;
@@ -128,6 +128,8 @@ i {
   overflow: hidden;
   display: flex;
   align-items: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .tab:hover {

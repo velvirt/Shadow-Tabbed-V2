@@ -49,6 +49,10 @@
         <div id="right-control">
           <i class="fa-sharp fa-solid fa-gear fa-lg" id="settings"></i>
         </div>
+        <!-- Dev Btn -->
+        <div id="right-control">
+          <i class="fa-solid fa-wrench fa-lg" id="devbtn" onclick="inspect()"></i>
+        </div>
       </div>
     </div>  
 
@@ -196,30 +200,35 @@ document.addEventListener('click', handleClick);
 </script>
 
 <script>
-let previousActiveTab = null;
-
-setInterval(function() {
-  const activeTab = tabsContainer.querySelector('.tab.active');
-
-  if (activeTab !== previousActiveTab) {
+  let previousActiveTab = null;
+  
+  function removeCloseButtonFromPreviousTab() {
     if (previousActiveTab) {
-      const closeBtn = previousActiveTab.querySelector('.close-btn');
+      const closeBtn = previousActiveTab.querySelector('.close-btn-tab');
       if (closeBtn) {
         closeBtn.remove();
       }
     }
-
-    if (activeTab && activeTab.dataset.src !== 'home.html') {
-      const closeBtn = document.createElement('div');
-      closeBtn.classList.add('close-btn-tab');
-      closeBtn.innerHTML = '<div onclick="closebutton(event)"><i class="fas fa-times"></i></div>';
-      activeTab.appendChild(closeBtn);
-    }
-
-    previousActiveTab = activeTab;
   }
-}, 1);
-</script>
+  
+  setInterval(function() {
+    const activeTab = tabsContainer.querySelector('.tab.active');
+  
+    if (activeTab !== previousActiveTab) {
+      removeCloseButtonFromPreviousTab();
+  
+      if (activeTab && activeTab.dataset.src !== 'home.html') {
+        const closeBtn = document.createElement('div');
+        closeBtn.classList.add('close-btn-tab');
+        closeBtn.innerHTML = '<div onclick="closebutton(event)"><i class="fas fa-times"></i></div>';
+        activeTab.appendChild(closeBtn);
+      }
+  
+      previousActiveTab = activeTab;
+    }
+  }, 1);
+  </script>
+  
 
 
 <script>
