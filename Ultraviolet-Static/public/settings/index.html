@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html style="border:none; border-width: 0px;">
 <head>
   <title>Shadow Settings</title>
-  <link rel="stylesheet" type="text/css" href="index.css">
-  <link href="https://fonts.cdnfonts.com/css/blacklisted" rel="stylesheet">
+  <link id="themeStylesheet" rel="stylesheet" type="text/css" href="/CSS/index.css" >
+  <script src="js/themes.js"> </script>
   <link rel="icon" type="image/png"  href="">
 </head>
-<body>
+<body class="settingsbody" style="border:none; border-width: 0px;">
   <div class="flex-center">
     <div class="category-row">
         <div class="category">
@@ -59,12 +59,12 @@
         </div>
       </div>
       <div class="category">
-        <h2>Panic Key</h2>
-        <div class="section-content">
-          <div class="panic-key-container">
-            <p>Set up your Panic Key to hide this website</p>
-            <input id="key-input" type="text" placeholder="Key" value="]">
-            <input id="website-input" type="text" placeholder="Website" value="https://classroom.gooogle.com">
+        <h2 style="margin-top: -125px;">Themes</h2>
+        <div class="section-content" style="margin-top:-20px">
+          <div class="theme-buttons">
+            <button class="button button2"  onclick="changeTheme('/CSS/index.css')"  >Default</button>
+            <button onclick="changeTheme('/CSS/themes/light.css')"  class="button button2">Light</button>
+            <button onclick="changeTheme('/CSS/themes/poop.css')"  class="button button2">Poop Theme</button>
           </div>
         </div>
       </div>      
@@ -130,3 +130,18 @@ document.getElementById("searchEngineDropdown").addEventListener("change", funct
 <script src="js/panic.js"></script>
 <script src="js/index.js"></script>
 <script src="js/settings.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  var storedTheme = localStorage.getItem("themes");
+  var defaultCSSPath = "/CSS/index.css";
+  var cssLink = document.getElementById("themeStylesheet");
+  cssLink.href = storedTheme || defaultCSSPath;
+
+  window.addEventListener("storage", function(event) {
+    if (event.key === "themes" && event.newValue !== cssLink.href) {
+      cssLink.href = event.newValue;
+    }
+  });
+});
+</script>

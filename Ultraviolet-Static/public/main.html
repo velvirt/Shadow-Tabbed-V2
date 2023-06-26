@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <meta name="googlebot" content="index, follow, snippet" />
     <link rel="shortcut icon" href="favicon.ico" />
-    <link rel="stylesheet" href="CSS/index.css" />
+    <link id="themeStylesheet" rel="stylesheet" type="text/css" href="" >
+    <script src="settings/js/themes.js"> </script>
     <script src="uv/uv.bundle.js" defer></script>
     <script src="uv/uv.config.js" defer></script>
     <script src="tab.js"> </script>
@@ -24,8 +25,8 @@
   </head>
   <body class="mainbody">
     <header class="mainheading">
-      <h1 class="heading" style="padding-bottom: 0;">Shadow</h1>
-      <p id="ping-time" style=" color:white; margin-top: -1%; text-align: center;"></p>
+      <h1 class="heading" style="padding-bottom: 0; text-transform: none;">Shadow</h1>
+      <p id="ping-time" style=" margin-top: -1%; text-align: center;"></p>
       <ul id="suggestions-list" class="mainsgtlist"></ul>
     </header>
     <br><br>
@@ -166,4 +167,17 @@
     console.log(`Performing search for: ${searchTerm}`);
   }
 </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  var storedTheme = localStorage.getItem("themes");
+  var defaultCSSPath = "/CSS/index.css";
+  var cssLink = document.getElementById("themeStylesheet");
+  cssLink.href = storedTheme || defaultCSSPath;
 
+  window.addEventListener("storage", function(event) {
+    if (event.key === "themes" && event.newValue !== cssLink.href) {
+      cssLink.href = event.newValue;
+    }
+  });
+});
+</script>

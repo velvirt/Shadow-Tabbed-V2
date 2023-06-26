@@ -1,119 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html class="home-html" style="border:none; border-width: 0px;">
 <head>
   <title>Shadow Browser - Home</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      background-color: #1a1f2b;
-      color: #e5e5e5;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    .header {
-      background-color: #10151e;
-      padding: 20px;
-      text-align: center;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 40px;
-      font-weight: bold;
-      color: #ffffff;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-    }
-
-    .content {
-      padding: 40px;
-      text-align: center;
-    }
-
-    h2 {
-      font-size: 28px;
-      margin-bottom: 20px;
-      color: #ffffff;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
-    }
-
-    p {
-      font-size: 18px;
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
-
-    .features {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      margin-top: 40px;
-    }
-
-    .feature {
-      flex: 0 0 300px;
-      padding: 20px;
-      height:300px;
-      margin: 10px;
-      background-color: #10151e;
-      border-radius: 5px;
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-
-    .feature:hover {
-      transform: translateY(-10px);
-    }
-
-    .feature h3 {
-      font-size: 24px;
-      margin-bottom: 10px;
-      color: #ffffff;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
-    }
-
-    .feature p {
-      font-size: 16px;
-      line-height: 1.4;
-    }
-
-    footer {
-      background-color: #10151e;
-      padding: 20px;
-      text-align: center;
-      font-size: 14px;
-      color: #b3b3b3;
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-    }
-  </style>
+  <link id="themeStylesheet" rel="stylesheet" type="text/css" href="" >
+  <script src="settings/js/themes.js"> </script>
 </head>
-<body>
-
-  <div class="header">
-    <h1>Shadow Browser</h1>
+<body class="home-body" style="border:none; border-width: 0px;">
+  <div class="home-header">
+    <h1 class="home-h1">Shadow Browser</h1>
   </div>
-
-  <div class="content">
-    <h2>Welcome</h2>
-    <p>Shadow Browser is a modern and powerful web browser designed to enhance your digital experience.<br> With its sleek interface and advanced features, it offers a seamless and intuitive user experience.</p>
-    <div class="features">
-      <div class="feature">
-        <h3>Multi-Powered</h3>
+  <div class="home-content">
+    <h2 class="home-h2">Welcome</h2>
+    <p class="home-p">Shadow Browser is a modern and powerful web browser designed to enhance your digital experience.<br> With its sleek interface and advanced features, it offers a seamless and intuitive user experience.</p>
+    <div class="home-features">
+      <div class="home-feature">
+        <h3 class="home-feature-h3">Multi-Powered</h3>
         <p>Shadow Browser is equipped with multiple power modes to optimize performance and energy efficiency based on your needs. Whether you're working, browsing, or relaxing, Shadow Browser has you covered.</p>
       </div>
-      <div class="feature">
-        <h3>Secure and Reliable</h3>
+      <div class="home-feature">
+        <h3 class="home-feature-h3">Secure and Reliable</h3>
         <p>With built-in security features and regular updates, Shadow Browser ensures the safety and privacy of your online activities. You can trust that your information is protected against threats and vulnerabilities.</p>
       </div>
-      <div class="feature">
-        <h3>User-Friendly UI</h3>
+      <div class="home-feature">
+        <h3 class="home-feature-h3">User-Friendly UI</h3>
         <p>Shadow Browser offers an intuitive and user-friendly interface, making it easy to navigate and access your favorite websites. Customize your browsing experience and personalize your settings with ease.</p>
       </div>
     </div>
@@ -124,3 +33,25 @@
   </footer>
 </body>
 </html>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+</style>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  var storedTheme = localStorage.getItem("themes");
+  var defaultCSSPath = "/CSS/index.css";
+  var cssLink = document.getElementById("themeStylesheet");
+  cssLink.href = storedTheme || defaultCSSPath;
+
+  window.addEventListener("storage", function(event) {
+    if (event.key === "themes" && event.newValue !== cssLink.href) {
+      cssLink.href = event.newValue;
+    }
+  });
+});
+</script>

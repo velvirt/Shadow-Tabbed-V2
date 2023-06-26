@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html class="indexhtml">
   <head>
     <meta charset="utf-8" />
     <meta name="googlebot" content="index, follow, snippet" />
     <link rel="shortcut icon" content="favicon.ico" />
-    <link rel="stylesheet" href="CSS/index.css" />
     <script src="uv/uv.bundle.js" defer></script>
+    <link id="themeStylesheet" rel="stylesheet" type="text/css" href="" >
+    <script src="settings/js/themes.js"> </script>
     <script src="uv/uv.config.js" defer></script>
     <title>Shadow Browser</title>
     <script src="register-sw.js" defer></script>
@@ -22,7 +23,7 @@
     <script type="application/ld+json">
     </script>
   </head>
-  <body>
+  <body class="indexbody">
     <div class="control-row">
       <!-- Controls  on Left of Web Input-->
       <i class="fa-solid fa-expand fa-lg" id="full-btn"></i>
@@ -303,4 +304,131 @@ document.addEventListener('keydown', function(event) {
 });
 
 
+</script>
+
+<script>
+  const devntm = document.getElementById("devbtn");
+    let toggleState = false;
+    devntm.addEventListener("click", function() {
+      if (toggleState) {
+        eruda.hide();
+        eruda.destroy();
+      } else {
+        var script = document.createElement('script');
+        script.src = "//cdn.jsdelivr.net/npm/eruda";
+        document.body.appendChild(script);
+        script.onload = function () {
+          eruda.init();
+          eruda.show();
+      }}
+      toggleState = !toggleState;
+    });
+
+
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  const fullBtn = document.getElementById('full-btn');
+  fullBtn.addEventListener('click', function() {
+    const activeIframe = iframeContainer.querySelector('iframe:not([style*="display: none"])');
+    if (activeIframe) {
+      if (activeIframe.requestFullscreen) {
+        activeIframe.requestFullscreen();
+      } else if (activeIframe.mozRequestFullScreen) {
+        activeIframe.mozRequestFullScreen();
+      } else if (activeIframe.webkitRequestFullscreen) {
+        activeIframe.webkitRequestFullscreen();
+      } else if (activeIframe.msRequestFullscreen) {
+        activeIframe.msRequestFullscreen();
+      }
+    }
+  });
+
+  const forwardBtn = document.getElementById('forward');
+  forwardBtn.addEventListener('click', function() {
+    const activeIframe = iframeContainer.querySelector('iframe:not([style*="display: none"])');
+    if (activeIframe && activeIframe.contentWindow) {
+      activeIframe.contentWindow.history.forward();
+    }
+  });
+
+  const backBtn = document.getElementById('back');
+  backBtn.addEventListener('click', function() {
+    const activeIframe = iframeContainer.querySelector('iframe:not([style*="display: none"])');
+    if (activeIframe && activeIframe.contentWindow) {
+      activeIframe.contentWindow.history.back();
+    }
+  });
+
+  const reloadBtn = document.getElementById('reload');
+  reloadBtn.addEventListener('click', function() {
+    const activeIframe = iframeContainer.querySelector('iframe:not([style*="display: none"])');
+    if (activeIframe) {
+      activeIframe.src = activeIframe.src;
+    }
+  });
+
+  const discordBtn = document.getElementById('discord');
+  discordBtn.addEventListener('click', function() {
+    addTab();
+    const newTab = tabsContainer.querySelector('.tab[data-tab-id="' + (tabCounter - 1) + '"]');
+    changeTab(newTab, '/uv/service/hvtrs8%2F-dksaopd%2Ccmm-ilvktg%2Fr9j3fTJAOA');
+  });
+
+  const openIframeBtn = document.getElementById('openiframe');
+  openIframeBtn.addEventListener('click', function() {
+    const activeTab = tabsContainer.querySelector('.tab.active');
+    if (activeTab) {
+      const tabId = activeTab.dataset.tabId;
+      const iframe = tabIframeMap.get(tabId);
+      const iframeSrc = iframe.getAttribute('src');
+      window.open(iframeSrc, '_blank');
+    }
+  });
+
+  const settingsBtn = document.getElementById('settings');
+  settingsBtn.addEventListener('click', function() {
+    addTab();
+    const newTab = tabsContainer.querySelector('.tab[data-tab-id="' + (tabCounter - 1) + '"]');
+    changeTab(newTab, '/settings/');
+  });
+});
+
+</script>
+<script src="settings/js/panic.js"></script>
+<script src="settings/js/index.js"></script>
+<script src="settings/js/settings.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var storedTheme = localStorage.getItem("themes");
+    var defaultCSSPath = "/CSS/index.css";
+    var cssLink = document.getElementById("themeStylesheet");
+    cssLink.href = storedTheme || defaultCSSPath;
+
+    window.addEventListener("message", function(event) {
+      if (event.data.theme && event.data.theme !== cssLink.href) {
+        cssLink.href = event.data.theme;
+        localStorage.setItem("themes", event.data.theme);
+      }
+    });
+  });
+</script>
+
+
+<script>
+  var storedTheme = localStorage.getItem("themes");
+  var defaultCSSPath = "/CSS/index.css";
+  var cssLink = document.getElementById("themeStylesheet");
+  cssLink.href = storedTheme || defaultCSSPath;
+
+  function updateTheme() {
+    var newTheme = localStorage.getItem("themes");
+    if (newTheme && newTheme !== cssLink.href) {
+      cssLink.href = newTheme;
+    }
+  }
+
+  setInterval(updateTheme, 500);
 </script>
