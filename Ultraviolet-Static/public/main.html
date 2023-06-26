@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="googlebot" content="index, follow, snippet" />
     <link rel="shortcut icon" href="favicon.ico" />
-    <link rel="stylesheet" href="CSS/main.css" />
+    <link rel="stylesheet" href="CSS/index.css" />
     <script src="uv/uv.bundle.js" defer></script>
     <script src="uv/uv.config.js" defer></script>
     <script src="tab.js"> </script>
@@ -22,20 +22,17 @@
     <script type="application/ld+json"></script>
     <title>New Tab</title>
   </head>
-  <body>
-    <header>
+  <body class="mainbody">
+    <header class="mainheading">
       <h1 class="heading" style="padding-bottom: 0;">Shadow</h1>
       <p id="ping-time" style=" color:white; margin-top: -1%; text-align: center;"></p>
-      <ul id="suggestions-list"></ul>
-
+      <ul id="suggestions-list" class="mainsgtlist"></ul>
     </header>
     <br><br>
-
-
     <div class="search-container">
       <form id="uv-form" class="flex-center">
         <input style="z-index: -9999;" id="uv-search-engine" value="" type="hidden"/>
-        <input id="uv-address" type="text" placeholder="Search the web" autofocus/>
+        <input id="uv-address" class="mainurl"type="text" placeholder="Search the web" autofocus/>
       </form>
       <div class="shortcuts">
         <a id="discord" >

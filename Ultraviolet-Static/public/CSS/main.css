@@ -1,4 +1,4 @@
-body {
+.mainbody {
   background-color: #1a1a32;
   margin-top: -2%;
   overflow: auto;
@@ -6,7 +6,7 @@ body {
   font-family: Arial, sans-serif;
 }
 
-header {
+.mainheading {
   background-color: #1a1a32;
   padding: 10px;
   margin-top: 10.5%;
