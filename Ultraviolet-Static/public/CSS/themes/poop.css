@@ -691,3 +691,8 @@ header {
 .home-footer a:hover {
   text-decoration: underline;
 }
+
+footer{
+  text-align: center;
+
+}
