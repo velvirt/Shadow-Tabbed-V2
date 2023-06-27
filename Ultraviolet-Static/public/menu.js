@@ -16,54 +16,13 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function copy() {
-    // Get the text content or value you want to copy
-    var textToCopy = "Text to be copied";
-  
-    // Create a temporary textarea element
-    var tempTextarea = document.createElement("textarea");
-    tempTextarea.value = textToCopy;
-  
-    // Append the textarea to the DOM
-    document.body.appendChild(tempTextarea);
-  
-    // Select the text inside the textarea
-    tempTextarea.select();
-  
-    // Copy the selected text to the clipboard
-    document.execCommand("copy");
-  
-    // Remove the temporary textarea from the DOM
-    document.body.removeChild(tempTextarea);
+  navigator.clipboard.writeText(selectedText);
   }
-  
-  function paste() {
-    // Create a temporary textarea element
-    var tempTextarea = document.createElement("textarea");
-  
-    // Append the textarea to the DOM
-    document.body.appendChild(tempTextarea);
-  
-    // Focus on the textarea
-    tempTextarea.focus();
-  
-    // Execute the paste command
-    document.execCommand("paste");
-  
-    // Get the pasted content from the textarea
-    var pastedContent = tempTextarea.value;
-  
-    // Remove the temporary textarea from the DOM
-    document.body.removeChild(tempTextarea);
-  
-    // Use the pasted content as needed
-    console.log("Pasted content:", pastedContent);
-  }
-  
-  function selectAll() {
-    // Get the target element or textarea where you want to select all the text
-    var targetElement = document.getElementById("target");
-  
-    // Select all the text inside the target element
-    targetElement.select();
+
+  async function paste() {
+      const activeElement = document.activeElement;
+      const text = await navigator.clipboard.readText();
+      activeElement.value = text;
+
   }
   

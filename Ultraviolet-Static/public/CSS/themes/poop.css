@@ -337,7 +337,7 @@ i {
   font-family: 'Nunito', sans-serif;
 }
 
-#suggestions-listmain #suggestions-list {
+#suggestions-listmain {
   list-style-type: none;
   padding: 0;
   position: absolute;
@@ -346,9 +346,9 @@ i {
   transform: translate(-50%, -50%);
   opacity: 1;
   z-index: 9999;
-  color: #333;
+  color: #fff;
   border-radius: 5px;
-  background-color: #4e2121;
+  background-color: #8b572a;
   align-items: center;
   width: 30%;
 }
@@ -356,7 +356,7 @@ i {
 #suggestions-listmain .suggestion-item {
   padding: 10px;
   z-index: 9999;
-  color: #ffffff;
+  color: #fff;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
   text-transform: capitalize;
@@ -364,23 +364,24 @@ i {
 }
 
 #suggestions-listmain .suggestion-item:hover {
-  background-color: #673a3a;
+  background-color: #7a4f25;
   text-transform: capitalize;
 }
 
 #suggestions-listmain .suggestion-item span {
-  color: #ffffff;
+  color: #fff;
   text-transform: capitalize;
   font-family: 'Nunito', sans-serif;
   font-size: 16px;
 }
 
 #suggestions-listmain .suggestion-item .suggestion-url {
-  color: #aaaaaa;
+  color: #aaa;
   text-transform: capitalize;
   font-family: Arial, sans-serif;
   font-size: 14px;
 }
+
 .settingsbody {
   background-color: #6d5744;
   color: #ffffff;

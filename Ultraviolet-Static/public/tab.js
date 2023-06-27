@@ -121,20 +121,21 @@ closeBtn.addEventListener('click', function() {
   }
 });
 
-function addTab() {
+function addTab(title) {
   const tabManager = document.querySelector('.tab-manager');
   const tabId = tabCounter++;
 
   const newTab = document.createElement('div');
   newTab.classList.add('tab');
   newTab.dataset.tabId = tabId;
-  newTab.innerHTML = '<i class="fa-solid fa-table-columns fa-lg"></i> New Tab';
+  newTab.innerHTML = title || '<i class="fa-solid fa-table-columns fa-lg"></i> New Tab';
   tabManager.insertAdjacentElement('beforebegin', newTab);
 
   const iframe = createIframe('');
   iframe.dataset.tabId = tabId;
   tabIframeMap.set(tabId, iframe);
 }
+
 
   function closebutton(){
       const activeTab = tabsContainer.querySelector('.tab.active');

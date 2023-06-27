@@ -371,7 +371,7 @@ document.addEventListener('keydown', function(event) {
 
   const discordBtn = document.getElementById('discord');
   discordBtn.addEventListener('click', function() {
-    addTab();
+    addTab('<i class="fa-brands fa-discord fa-lg"></i> Discord');
     const newTab = tabsContainer.querySelector('.tab[data-tab-id="' + (tabCounter - 1) + '"]');
     changeTab(newTab, '/uv/service/hvtrs8%2F-dksaopd%2Ccmm-ilvktg%2Fr9j3fTJAOA');
   });
@@ -389,7 +389,7 @@ document.addEventListener('keydown', function(event) {
 
   const settingsBtn = document.getElementById('settings');
   settingsBtn.addEventListener('click', function() {
-    addTab();
+    addTab('<i class="fa-sharp fa-solid fa-gear fa-lg"></i> Settings');
     const newTab = tabsContainer.querySelector('.tab[data-tab-id="' + (tabCounter - 1) + '"]');
     changeTab(newTab, '/settings/');
   });

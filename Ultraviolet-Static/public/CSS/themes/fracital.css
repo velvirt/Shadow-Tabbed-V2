@@ -336,7 +336,7 @@ html, body {
     font-family: 'Nunito', sans-serif;
   }
   
-  #suggestions-listmain #suggestions-list {
+  #suggestions-listmain {
     list-style-type: none;
     padding: 0;
     position: absolute;
@@ -345,9 +345,9 @@ html, body {
     transform: translate(-50%, -50%);
     opacity: 1;
     z-index: 9999;
-    color: black;
+    color: #fff;
     border-radius: 5px;
-    background-color: #000000;
+    background-color: #ff77a9;
     align-items: center;
     width: 30%;
   }
@@ -355,7 +355,7 @@ html, body {
   #suggestions-listmain .suggestion-item {
     padding: 10px;
     z-index: 9999;
-    color:  black;
+    color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
     text-transform: capitalize;
@@ -363,23 +363,24 @@ html, body {
   }
   
   #suggestions-listmain .suggestion-item:hover {
-    background-color: #ff23b4;
+    background-color: #333;
     text-transform: capitalize;
   }
   
   #suggestions-listmain .suggestion-item span {
-    color:  black;
+    color: #fff;
     text-transform: capitalize;
     font-family: 'Nunito', sans-serif;
     font-size: 16px;
   }
   
   #suggestions-listmain .suggestion-item .suggestion-url {
-    color: black;
+    color: #aaa;
     text-transform: capitalize;
     font-family: Arial, sans-serif;
     font-size: 14px;
   }
+  
   
   .settingsbody {
     background-color: #000000;
