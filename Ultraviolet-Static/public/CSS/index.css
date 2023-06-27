@@ -341,7 +341,7 @@ i {
   font-family: 'Nunito', sans-serif;
 }
 
-.mainsgtlist #suggestions-list {
+#suggestions-listmain {
   list-style-type: none;
   padding: 0;
   position: absolute;
@@ -357,7 +357,7 @@ i {
   width: 30%;
 }
 
-.mainsgtlist .suggestion-item {
+#suggestions-listmain .suggestion-item {
   padding: 10px;
   z-index: 9999;
   color: #ffffff;
@@ -367,21 +367,20 @@ i {
   margin-bottom: 5px;
 }
 
-
-.mainsgtlist .suggestion-item:hover {
+#suggestions-listmain .suggestion-item:hover {
   background-color: #3a2967;
   text-transform: capitalize;
 }
 
 
-.mainsgtlist .suggestion-item span {
+#suggestions-listmain  .suggestion-item span {
   color: #ffffff;
   text-transform: capitalize;
   font-family: 'Nunito', sans-serif;
   font-size: 16px;
 }
 
-.mainsgtlist .suggestion-item .suggestion-url {
+#suggestions-listmain .suggestion-item .suggestion-url {
   color: #aaaaaa;
   text-transform: capitalize;
   font-family: Arial, sans-serif;
@@ -695,3 +694,38 @@ footer {
   bottom: 0;
   width: 100%;
 }
+
+#custom-menu {
+  position: absolute;
+  background-color: #1e6091;
+  color: #ffffff;
+  padding: 5px;
+  display: none;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+#custom-menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#custom-menu ul li {
+  margin-bottom: 5px;
+  border-bottom: 1px solid black;
+  padding: 5px 0;
+}
+
+#custom-menu ul li:last-child {
+  border-bottom: none;
+}
+
+#custom-menu ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  display: block;
+  padding: 5px;
+  cursor: pointer;
+}
+

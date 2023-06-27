@@ -336,7 +336,7 @@ html, body {
     font-family: 'Nunito', sans-serif;
   }
   
-  .mainsgtlist #suggestions-list {
+  #suggestions-listmain #suggestions-list {
     list-style-type: none;
     padding: 0;
     position: absolute;
@@ -345,37 +345,37 @@ html, body {
     transform: translate(-50%, -50%);
     opacity: 1;
     z-index: 9999;
-    color: #333;
+    color: black;
     border-radius: 5px;
     background-color: #000000;
     align-items: center;
     width: 30%;
   }
   
-  .mainsgtlist .suggestion-item {
+  #suggestions-listmain .suggestion-item {
     padding: 10px;
     z-index: 9999;
-    color: #ff69b4;
+    color:  black;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
     text-transform: capitalize;
     margin-bottom: 5px;
   }
   
-  .mainsgtlist .suggestion-item:hover {
-    background-color: #673a3a;
+  #suggestions-listmain .suggestion-item:hover {
+    background-color: #ff23b4;
     text-transform: capitalize;
   }
   
-  .mainsgtlist .suggestion-item span {
-    color: #ff69b4;
+  #suggestions-listmain .suggestion-item span {
+    color:  black;
     text-transform: capitalize;
     font-family: 'Nunito', sans-serif;
     font-size: 16px;
   }
   
-  .mainsgtlist .suggestion-item .suggestion-url {
-    color: #ff69b4;
+  #suggestions-listmain .suggestion-item .suggestion-url {
+    color: black;
     text-transform: capitalize;
     font-family: Arial, sans-serif;
     font-size: 14px;
@@ -708,5 +708,40 @@ html, body {
   
   .home-footer-link:hover {
     text-decoration: underline;
+  }
+  
+  #custom-menu {
+    position: absolute;
+    background-color: #f11268;
+    color: #000000;
+    padding: 5px;
+    font-family: 'Roboto', sans-serif;
+    display: none;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  #custom-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #custom-menu ul li {
+    margin-bottom: 5px;
+    border-bottom: 1px solid #000000;
+    padding: 5px 0;
+  }
+  
+  #custom-menu ul li:last-child {
+    border-bottom: none;
+  }
+  
+  #custom-menu ul li a {
+    color: #000000;
+    text-decoration: none;
+    display: block;
+    padding: 5px;
+    cursor: pointer;
   }
   

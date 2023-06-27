@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <script src="menu.js"> </script>
     <meta name="googlebot" content="index, follow, snippet" />
     <link rel="shortcut icon" href="favicon.ico" />
     <link id="themeStylesheet" rel="stylesheet" type="text/css" href="" >
@@ -23,11 +24,11 @@
     <script type="application/ld+json"></script>
     <title>New Tab</title>
   </head>
-  <body class="mainbody">
+  <body class="mainbody" style="overflow:hidden;">
     <header class="mainheading">
       <h1 class="heading" style="padding-bottom: 0; text-transform: none;">Shadow</h1>
       <p id="ping-time" style=" margin-top: -1%; text-align: center;"></p>
-      <ul id="suggestions-list" class="mainsgtlist"></ul>
+      <ul id="suggestions-listmain" class="mainsgtlist"></ul>
     </header>
     <br><br>
     <div class="search-container">
@@ -78,6 +79,14 @@
         </a>
       </div>
     </div>
+    <div id="custom-menu">
+      <ul>
+        <li><a onclick="copy()">Copy</a></li>
+        <li><a onclick="paste()">Paste</a></li>
+        <li><a onclick="selectAll()">Select All</a></li>
+      </ul>
+    </div><div id="content"></div>
+    <script src="menu.js"> </script>
   </body>
 </html>
 
@@ -112,7 +121,7 @@
 
 <script>
   const addressInput = document.getElementById('uv-address');
-  const suggestionsList = document.getElementById('suggestions-list');
+  const suggestionsList = document.getElementById('suggestions-listmain');
   let timeoutId;
 
   addressInput.addEventListener('input', handleInput);

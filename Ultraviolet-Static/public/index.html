@@ -23,7 +23,7 @@
     <script type="application/ld+json">
     </script>
   </head>
-  <body class="indexbody">
+  <body class="indexbody" id="body">
     <div class="control-row">
       <!-- Controls  on Left of Web Input-->
       <i class="fa-solid fa-expand fa-lg" id="full-btn"></i>
@@ -35,7 +35,7 @@
         <input style="z-index: -9999;" id="uv-search-engine" value="" type="hidden"/>
         <input type="text" class="url" placeholder="Enter URL" id="uv-address">
       </form>
-      <ul id="suggestions-list"></ul>
+      <ul id="suggestions-list" class="indexsuggestlist"></ul>
         <!-- Controls on Right of Web Input-->
       <div class="right-control-row">
         <!--- Discord -->
@@ -432,3 +432,12 @@ document.addEventListener('keydown', function(event) {
 
   setInterval(updateTheme, 500);
 </script>
+
+<div id="custom-menu">
+  <ul>
+    <li><a onclick="copy()">Copy</a></li>
+    <li><a onclick="paste()">Paste</a></li>
+    <li><a onclick="selectAll()">Select All</a></li>
+  </ul>
+</div><div id="content"></div>
+<script src="menu.js"> </script>

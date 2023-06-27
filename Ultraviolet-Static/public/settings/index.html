@@ -4,9 +4,17 @@
   <title>Shadow Settings</title>
   <link id="themeStylesheet" rel="stylesheet" type="text/css" href="/CSS/index.css" >
   <script src="js/themes.js"> </script>
+  <script src="/menu.js"> </script>
   <link rel="icon" type="image/png"  href="">
 </head>
 <body class="settingsbody" style="border:none; border-width: 0px;">
+  <div id="custom-menu">
+    <ul>
+      <li><a onclick="copy()">Copy</a></li>
+      <li><a onclick="paste()">Paste</a></li>
+      <li><a onclick="selectAll()">Select All</a></li>
+    </ul>
+  </div><div id="content"></div>
   <div class="flex-center">
     <div class="category-row">
         <div class="category">
@@ -73,6 +81,7 @@
   </div>
 
   <script src="script.js"></script>
+
 </body>
 </html>
 
