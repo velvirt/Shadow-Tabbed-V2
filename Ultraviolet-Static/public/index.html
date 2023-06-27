@@ -68,7 +68,7 @@
 </div>
 
     <!-- Iframe Container-->
-    <div id="iframe-container" ></div>
+    <div id="content"><div id="iframe-container" ></div></div>
   </body>
   </html>
 
@@ -327,6 +327,54 @@ document.addEventListener('keydown', function(event) {
 
 </script>
 
+
+
+<script>
+  var storedTheme = localStorage.getItem("themes");
+  var defaultCSSPath = "/CSS/index.css";
+  var cssLink = document.getElementById("themeStylesheet");
+  cssLink.href = storedTheme || defaultCSSPath;
+
+  function updateTheme() {
+    var newTheme = localStorage.getItem("themes");
+    if (newTheme && newTheme !== cssLink.href) {
+      cssLink.href = newTheme;
+    }
+  }
+
+  setInterval(updateTheme, 500);
+</script>
+
+<div id="custom-menu">
+  <ul>
+    <div id="section">
+      <li><a onclick="copy()"><i class="fa-solid fa-copy"></i>Copy</a></li>
+      <li><a onclick="paste()"><i class="fa-solid fa-paste"></i> Paste</a></li>
+      <li><a onclick="selectAll()"><i class="fa-sharp fa-solid fa-border-all"></i>Select All</a></li>
+    </div>
+    <div id="section">
+      <li><a onclick="copy()"> <i class="fa-sharp fa-solid fa-gear fa-lg" id="settings"></i>Open Settings</a></li>
+      <li><a onclick="paste()"><i class="fa-brands fa-discord fa-lg" id="discord"></i>Open Discord</a></li>
+      <li><a onclick="paste()"><i class="fa-solid fa-wrench fa-lg" id="devbtn"></i>Open Dev Tools</a></li>
+      <li><a onclick="selectAll()"><i class="fa-solid fa-arrow-up-right-from-square fa-lg" id="openiframe"></i>Open Tab Content In A New Tab</a></li>
+    </div>
+    <div id="section">
+      <li><a onclick="copy()"><i class="fa-solid fa-lock"></i>Launch About:Blank in New Tab</a></li>
+      <li><a onclick="paste()"><i class="fa-solid fa-lock"></i>Launch About:Blank in New Window</a></li>
+    </div>
+    <div id="section">
+      <li><a onclick="copy()"><i class="fa-sharp fa-solid fa-arrow-right fa-lg" id="forward"></i>Forward</a></li>
+      <li><a onclick="paste()"><i class="fa-solid fa-arrow-left fa-lg" id="back"></i> Back</a></li>
+      <li><a onclick="selectAll()"><i class="fa-solid fa-rotate-right fa-lg" id="reload"></i>Reload</a></li>
+    </div>
+    <div id="section">
+      <li><a onclick="copy()"> <i class="fa-solid fa-expand fa-lg" id="full-btn"></i>Fullscreen Page</a></li>
+      <li><a onclick="fullscreentabcontent()"> <i class="fa-solid fa-expand fa-lg" id="full-btn"></i>Fullscreen Tab Content</a></li>
+    </div>
+  </ul>
+</div>
+<script src="menu.js"> </script>
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
   const fullBtn = document.getElementById('full-btn');
@@ -394,50 +442,4 @@ document.addEventListener('keydown', function(event) {
     changeTab(newTab, '/settings/');
   });
 });
-
 </script>
-<script src="settings/js/panic.js"></script>
-<script src="settings/js/index.js"></script>
-<script src="settings/js/settings.js"></script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var storedTheme = localStorage.getItem("themes");
-    var defaultCSSPath = "/CSS/index.css";
-    var cssLink = document.getElementById("themeStylesheet");
-    cssLink.href = storedTheme || defaultCSSPath;
-
-    window.addEventListener("message", function(event) {
-      if (event.data.theme && event.data.theme !== cssLink.href) {
-        cssLink.href = event.data.theme;
-        localStorage.setItem("themes", event.data.theme);
-      }
-    });
-  });
-</script>
-
-
-<script>
-  var storedTheme = localStorage.getItem("themes");
-  var defaultCSSPath = "/CSS/index.css";
-  var cssLink = document.getElementById("themeStylesheet");
-  cssLink.href = storedTheme || defaultCSSPath;
-
-  function updateTheme() {
-    var newTheme = localStorage.getItem("themes");
-    if (newTheme && newTheme !== cssLink.href) {
-      cssLink.href = newTheme;
-    }
-  }
-
-  setInterval(updateTheme, 500);
-</script>
-
-<div id="custom-menu">
-  <ul>
-    <li><a onclick="copy()">Copy</a></li>
-    <li><a onclick="paste()">Paste</a></li>
-    <li><a onclick="selectAll()">Select All</a></li>
-  </ul>
-</div><div id="content"></div>
-<script src="menu.js"> </script>

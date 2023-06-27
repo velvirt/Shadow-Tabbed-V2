@@ -65,6 +65,7 @@ function createIframe(src) {
   const iframe = document.createElement('iframe');
   iframe.setAttribute('src', src);
   iframe.style.width = '100%';
+  iframe.setAttribute('id', 'tab-iframe'); 
   iframe.style.height = '100%';
   iframe.style.display = 'none';
   iframeContainer.appendChild(iframe);

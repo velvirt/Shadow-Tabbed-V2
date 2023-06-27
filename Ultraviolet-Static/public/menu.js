@@ -18,9 +18,11 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
+
 function copy() {
   navigator.clipboard.writeText(selectedText);
 }
+
 
 function paste() {
 navigator.clipboard.readText()
@@ -33,6 +35,7 @@ console.error("Failed to read text from clipboard: ", error);
 });
 activeElement1.focus();
 }
+
 
 function selectAll() {
 var selection = window.getSelection();
@@ -49,3 +52,4 @@ selection.removeAllRanges();
 selection.addRange(range);
 }
 }
+
