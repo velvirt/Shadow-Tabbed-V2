@@ -52,4 +52,3 @@ selection.removeAllRanges();
 selection.addRange(range);
 }
 }
-
