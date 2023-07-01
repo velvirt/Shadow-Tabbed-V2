@@ -108,12 +108,19 @@ setInterval(checkUpdates, 1000);
 </script>
 
 <script>
+  window.addEventListener("storage", function(event) {
+    if (event.key === "searchengine") {
+      var searchEngineValue = event.newValue || "https://www.google.com/search?q=%s";
+      document.getElementById("uv-search-engine").value = searchEngineValue;
+    }
+  });
+
   var searchEngineValue = localStorage.getItem("searchengine");
     if (!searchEngineValue) {
     searchEngineValue = "https://www.google.com/search?q=%s";
   }
   document.getElementById("uv-search-engine").value = searchEngineValue;
-  </script>
+</script>
 
 
 <script>
