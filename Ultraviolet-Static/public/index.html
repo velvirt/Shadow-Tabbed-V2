@@ -207,33 +207,38 @@ document.addEventListener('click', handleClick);
 </script>
 
 <script>
-  let previousActiveTab = null;
-  
-  function removeCloseButtonFromPreviousTab() {
-    if (previousActiveTab) {
-      const closeBtn = previousActiveTab.querySelector('.close-btn-tab');
-      if (closeBtn) {
-        closeBtn.remove();
-      }
+let previousActiveTab = null;
+
+function removeCloseButtonFromPreviousTab() {
+  if (previousActiveTab) {
+    const closeBtn = previousActiveTab.querySelector('.close-btn-tab');
+    if (closeBtn) {
+      closeBtn.remove();
     }
   }
-  
-  setInterval(function() {
-    const activeTab = tabsContainer.querySelector('.tab.active');
-  
-    if (activeTab !== previousActiveTab) {
-      removeCloseButtonFromPreviousTab();
-  
-      if (activeTab && activeTab.dataset.src !== 'home.html') {
-        const closeBtn = document.createElement('div');
-        closeBtn.classList.add('close-btn-tab');
-        closeBtn.innerHTML = '<div onclick="closebutton(event)"><i class="fas fa-times"></i></div>';
-        activeTab.appendChild(closeBtn);
-      }
-  
-      previousActiveTab = activeTab;
+}
+
+function addCloseButtonToTab(tab) {
+  if (tab && tab.dataset.src !== 'home.html') {
+    let closeBtn = tab.querySelector('.close-btn-tab');
+    if (!closeBtn) {
+      closeBtn = document.createElement('div');
+      closeBtn.classList.add('close-btn-tab');
+      closeBtn.innerHTML = '<div onclick="closebutton(event)"><i class="fas fa-times"></i></div>';
+      tab.appendChild(closeBtn);
     }
-  }, 1);
+  }
+}
+
+setInterval(function() {
+  const activeTab = tabsContainer.querySelector('.tab.active');
+
+  if (activeTab !== previousActiveTab) {
+    removeCloseButtonFromPreviousTab();
+    previousActiveTab = activeTab;
+    addCloseButtonToTab(activeTab);
+  }
+}, 100);
   </script>
   
 

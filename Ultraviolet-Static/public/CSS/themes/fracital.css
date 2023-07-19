@@ -121,7 +121,7 @@ html, body {
     border-radius: 5px;
     height: 30px;
     width: fit-content;
-    max-width: 150px;
+    max-width: 200px;
     transition: background-color 0.3s ease;
     overflow: hidden;
     display: flex;
@@ -163,16 +163,22 @@ html, body {
     margin-left: 15px;
   }
 
+  .tab {
+    position: relative;
+  }
+  
   .close-btn-tab {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: -2px;
-    padding: 5px;
-    width: 25px;
-    border-radius: 55px;
+    padding: 1px;
+    width: 15px;
+    border-radius: 50%;
     text-align: center;
-    margin-left: 15px;
+    position: absolute;
+    top: 7px;
+    right: 5px;
+    cursor: pointer;
   }
 
   .close-btn-tab:hover{

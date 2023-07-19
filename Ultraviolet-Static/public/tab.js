@@ -50,14 +50,21 @@ function changeTab(selectedTab, src) {
     const iframe = createIframe(iframeSrc);
     tabIframeMap.set(tabId, iframe);
     showIframe(iframe);
-  }
-
-  if (src) {
-    const iframe = tabIframeMap.get(tabId);
-    iframe.setAttribute('src', __uv$config.prefix + __uv$config.encodeUrl(url));
+    iframe.addEventListener('load', function () {
+      const title = iframe.contentDocument.title;
+      if (iframe.getAttribute('src') !== 'home.html' && iframe.getAttribute('src') !== 'main.html' && iframe.getAttribute('src') !== '/settings/') {
+        selectedTab.innerHTML = '<i class="fa-solid fa-table-columns fa-lg"></i>' + title;
+        let closeBtn = selectedTab.querySelector('.close-btn-tab');
+        if (!closeBtn) {
+          closeBtn = document.createElement('div');
+          closeBtn.classList.add('close-btn-tab');
+          closeBtn.innerHTML = '<div onclick="closebutton(event)"><i class="fas fa-times"></i></div>';
+          selectedTab.appendChild(closeBtn);
+        }
+      }
+    });
   }
 }
-
 
 
 
