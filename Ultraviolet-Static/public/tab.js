@@ -120,24 +120,24 @@ function saveInputs(panelId) {
 function updateTabTitleFromIframe(iframe) {
     const activeTab = document.querySelector('.tabs li.active');
     if (activeTab) {
-        const iframeTitle = `<span style="margin-left: 10px;">${iframe.contentDocument.title}</span>`;
-        const imgsrc = `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${iframe.src}&size=24`;
-        const faviconsrc = `<img style="width: 20px; height: 20px; margin-right: 10px;" src="${imgsrc}">`;
-        activeTab.innerHTML = `${faviconsrc} ${iframeTitle} <span class="close-tab-btn"></span>`;
+        const src = iframe.src;
+        const encodedurl = src.split('/uv/service/')[1];
+        const decodedsrc = __uv$config.decodeUrl(encodedurl);
+        const imgsrc = `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${decodedsrc}&size=24`;
+        const faviconsrc = `<img style="margin-right: 10px;" src="${imgsrc}">`;
+        if (src.includes('home.html') || src.includes('main.html')) {
+        } else {
+            const iframeTitle = `<span style="margin-left: 10px;">${iframe.contentDocument.title}</span>`;
+            activeTab.innerHTML = `${faviconsrc} ${iframeTitle} <span class="close-tab-btn"></span>`;
+        }
     }
-
-    // Add event listeners for iframe changes
     iframe.addEventListener('load', function () {
         updateTabTitleFromIframe(iframe);
     });
-
     iframe.contentWindow.addEventListener('beforeunload', function () {
-        // Save the current tab title in case the iframe's title changes on reload
         iframe.dataset.lastTitle = iframe.contentDocument.title;
     });
-
     iframe.contentWindow.addEventListener('unload', function () {
-        // Restore the tab title from the saved title if the iframe's title changes on reload
         if (iframe.dataset.lastTitle) {
             iframe.contentDocument.title = iframe.dataset.lastTitle;
             iframe.dataset.lastTitle = '';
@@ -145,6 +145,7 @@ function updateTabTitleFromIframe(iframe) {
         }
     });
 }
+
 
 function resizeTabs() {
     const tabWidth = 100; // Set the width of each tab (change as needed)
@@ -192,8 +193,7 @@ forwardBtn.addEventListener('click', function () {
 function initTabs() {
     showTab('panel1');
     saveInputs('panel1');
-
-    // Add event listeners for the initial iframes
+    addTab('<i class="fa-solid fa-house"></i> Home', "home.html"); // Add the Home tab on load
     const iframes = document.querySelectorAll('.tab-panel iframe');
     iframes.forEach(iframe => {
         updateTabTitleFromIframe(iframe);
@@ -208,10 +208,6 @@ window.addEventListener('resize', function () {
 // Initialize tabs
 initTabs();
 
-window.onload = function () {
-    addTab('<i class="fa-solid fa-house"></i> Home', "home.html");
-};
-
 function changeTabSrc(src) {
     const activeTabPanel = document.querySelector('.tab-panel.active');
     if (activeTabPanel) {
@@ -219,3 +215,5 @@ function changeTabSrc(src) {
         iframe.src = src;
     }
 }
+
+
