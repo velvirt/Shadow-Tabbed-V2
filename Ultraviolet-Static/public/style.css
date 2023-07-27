@@ -66,11 +66,11 @@ body {
 
 .tabs li {
     position: relative;
-    margin-left: 4px;
+    margin-left: 1px;
     padding: 10px 15px;
     cursor: pointer;
     min-width: 0px;
-    max-width: 150px;
+    max-width: 200px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

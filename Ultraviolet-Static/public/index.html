@@ -4,6 +4,11 @@
     <title>Tab System </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <script src="uv/uv.bundle.js" defer></script>
+    <script src="uv/uv.config.js" defer></script>
+    <script src="register-sw.js" defer></script>
+    <script src="search.js" defer></script>
+    <script src="index.js" defer></script>
 </head>
 <body>
     <div class="tab-container">
@@ -15,9 +20,10 @@
                 <button class="back-btn"><i class="fas fa-chevron-left"></i></button>
                 <button class="refresh-btn"><i class="fas fa-sync"></i></button>
                 <button class="forward-btn"><i class="fas fa-chevron-right"></i></button>    
-              <div class="inputcontainermain">
-                <input class="search" type="text" id="search"placeholder="Type URL here">
-              </div>
+              <form class="inputcontainermain" id="uv-form">
+                <input class="search" type="text" id="uv-address" placeholder="Type URL here">
+                <input style="z-index: -9999;" id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"/>
+              </form>
               <div class="dropdown">
                 <button class="dropdown-button">
                     <i class="fa-solid fa-caret-down fa-lg"></i> Accessibility & Tools
@@ -37,7 +43,51 @@
             </div>
         </div>
     </div>
-
+    <div class="desc left-margin">
+      <p id="uv-error"></p>
+      <pre id="uv-error-code"></pre>
+    </div>
     <script src="tab.js"></script>
 </body>
 </html>
+
+<script>
+  var searchEngineValue = localStorage.getItem("searchengine");
+    if (!searchEngineValue) {
+    searchEngineValue = "https://www.google.com/search?q=%s";
+  }
+  document.getElementById("uv-search-engine").value = searchEngineValue;
+  </script>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("uv-form");
+    const address = document.getElementById("uv-address");
+    const searchEngine = document.getElementById("uv-search-engine");
+    const error = document.getElementById("uv-error");
+    const errorCode = document.getElementById("uv-error-code");
+  
+    const registerServiceWorker = registerSW().catch((err) => {
+      error.textContent = "Failed to register service worker.";
+      errorCode.textContent = err.toString();
+      throw err;
+    });
+
+    window.addEventListener('load', async () => {
+        await registerServiceWorker();
+      });
+
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  await registerServiceWorker;  
+  const url = search(address.value, searchEngine.value);
+  const imgsrc = `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${url}&size=15`;
+  const faviconsrc = `<img src="${imgsrc}">`;
+  changeTabSrc(__uv$config.prefix + __uv$config.encodeUrl(url));
+  setTimeout(function() {
+
+  }, 3000);
+});
+});
+</script>
