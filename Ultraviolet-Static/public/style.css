@@ -28,7 +28,6 @@ body {
     padding: 5px;
     background-color: #2a2a3d;
     border-radius: 5px;
-    margin-bottom: 10px;
 }
 
 .search {
@@ -122,7 +121,6 @@ iframe {
     justify-content: flex-end;
     padding: 5px;
     margin-top: 5px;
-    border-bottom: 2px solid #F5F5F5;
     background-color: #1a1a2b;
 }
 
@@ -193,3 +191,189 @@ iframe {
     transition: transform 0.5s;
 }
 
+#bookmarks-bar {
+    display: block;
+    position: relative;
+    margin-top: -5%;
+    border-bottom: 1px solid #fff;
+    align-items: center;
+    height: 32px;
+    background-color: #2a2a3d; /* Darker background color for the bookmarks bar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0 10px;
+    flex-wrap: wrap;
+}
+
+#bookmarks-panel a {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    padding: 0 10px;
+    height: 24px; /* Adjust the height of bookmarks */
+    text-decoration: none;
+    color: #fff; /* White text color for bookmark links */
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    background-color: #1a1a2b; /* Background color for bookmarks links */
+}
+
+#bookmarks-panel a:hover {
+    background-color: #5B3A75; /* Hover background color for bookmarks links */
+}
+
+#bookmarks-panel button {
+    cursor: pointer;
+    padding: 5px;
+    color: #fff;
+    font-size: 12px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    background-color: #6B52A3; /* Background color for bookmark buttons */
+}
+
+#bookmarks-btn:hover {
+    background-color: #4C2C63; /* Hover background color for bookmark buttons */
+}
+
+/* Additional CSS for bookmark icons */
+#bookmarks-bar img {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+#bookmarks-bar span {
+    max-width: 100px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.bookmarks-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    background-color: #f0f0f0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    overflow-y: auto;
+    display: none;
+    border-radius: 5px; /* Add border-radius to the bookmarks dropdown */
+}
+
+/* Style for the bookmarks dropdown links */
+.bookmarks-dropdown a {
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+    color: #2a2a3d;
+    transition: background-color 0.3s;
+}
+
+.bookmarks-dropdown a:hover {
+    background-color: #5B3A75;
+}
+
+#bookmarks-panel:hover .bookmarks-dropdown {
+    display: block; 
+}
+
+.bookmark-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width:400px;
+    height:400px;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #2a2a3d;
+    color: #fff; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 9999;
+}
+
+.bookmark-popup h2 {
+    margin-bottom: 10px;
+}
+
+.bookmark-popup input[type="text"] {
+    display: block;
+    width:90%;
+    margin:5px auto;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1a1a2b; /* Input background color */
+    color: #fff; /* Input text color */
+}
+
+.bookmark-popup input[type="text"]::placeholder {
+    color: #ccc; 
+}
+
+.bookmark-popup button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #6B52A3; /* Button background color */
+    color: #fff; /* Button text color */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.bookmark-popup button.cancel-btn {
+    background-color: #4C2C63; /* Cancel button background color */
+    margin-right: 10px;
+}
+
+.bookmark-popup button.save-btn {
+    background-color: #3A9259; /* Save button background color */
+}
+
+.bookmark-popup button:hover {
+    background-color: #8F6CAF; /* Hover background color for buttons */
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#bookmarks-overflow {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #f0f0f0;
+    box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    overflow-y: auto;
+    z-index: 2;
+  }
+  
+  #bookmarks-overflow.show {
+    display: block;
+  }
+  
+  .bookmark-item {
+    /* Add your existing styles here, if any */
+    /* For example: */
+    display: inline-flex;
+    align-items: center;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    padding: 0 10px;
+    height: 24px;
+    text-decoration: none;
+    color: #FFF;
+    border-radius: 5px;
+    background-color: #6B52A3;
+    transition: background-color 0.3s;
+  }
+  

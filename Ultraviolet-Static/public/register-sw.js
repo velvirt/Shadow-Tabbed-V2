@@ -1,5 +1,3 @@
-"use strict";
-
 const stockSW = "/uv/sw.js";
 const isServiceWorkerSupported = 'serviceWorker' in navigator;
 

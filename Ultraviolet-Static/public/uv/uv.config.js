@@ -1,8 +1,6 @@
-var bareServer = localStorage.getItem(bareServer);
-
 self.__uv$config = {
   prefix: "/uv/service/",
-  bare: bareServer,
+  bare: /bare/,
   encodeUrl: Ultraviolet.codec.xor.encode,
   decodeUrl: Ultraviolet.codec.xor.decode,
   handler: "/uv/uv.handler.js",

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tab System </title>
+    <title>Tab System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="uv/uv.bundle.js" defer></script>
@@ -11,33 +11,50 @@
     <script src="index.js" defer></script>
     <script src="options.js" defer></script>
 </head>
-<body onload="addTab(`<i class='fa-solid fa-house'></i> Home`, 'home.html');">
+<body>
     <div class="tab-container">
-      <ul class="tabs">
-        </ul>
+        <ul class="tabs"></ul>
         <div class="input-container">
-          <i class="fas fa-plus" id="add-tab-btn"></i></li>
+            <i class="fas fa-plus" id="add-tab-btn"></i>
             <i class="fas fa-times" id="closetabbtn"></i>
-                <button class="back-btn"><i class="fas fa-chevron-left"></i></button>
-                <button class="refresh-btn"><i class="fas fa-sync"></i></button>
-                <button class="forward-btn"><i class="fas fa-chevron-right"></i></button>    
-              <form class="inputcontainermain" id="uv-form">
+            <button class="back-btn"><i class="fas fa-chevron-left"></i></button>
+            <button class="refresh-btn"><i class="fas fa-sync"></i></button>
+            <button class="forward-btn"><i class="fas fa-chevron-right"></i></button>
+            <form class="inputcontainermain" id="uv-form">
                 <input class="search" type="text" id="uv-address" placeholder="Type URL here">
                 <input style="z-index: -9999;" id="uv-search-engine" value="" type="hidden"/>
-              </form>
-              <div class="dropdown">
+            </form>
+            <div class="dropdown">
                 <button class="dropdown-button">
                     <i class="fa-solid fa-caret-down fa-lg"></i> Accessibility & Tools
                 </button>
-              <div class="dropdown-content">
-                <a onclick="openNewTab()"><i class="fa-solid fa-user-ninja"></i> About:Blank</a>
-                <a onclick="settingoptions()"><i class="fa-solid fa-gear"></i> Settings</a>
-                <a href="#" onclick="devtooltoggle()"><i class="fa-solid fa-wrench"></i> Toggle Dev Tools</a>
-                <a href="#"><i class="fa-solid fa-circle-info"></i> Help/Info</a>
-                <a href="#"><i class="fa-solid fa-shuffle"></i> Bare Switcher</a>
-              </div>
+                <div class="dropdown-content">
+                    <a onclick="openNewTab()"><i class="fa-solid fa-user-ninja"></i> About:Blank</a>
+                    <a onclick="settingoptions()"><i class="fa-solid fa-gear"></i> Settings</a>
+                    <a href="#" onclick="devtooltoggle()"><i class="fa-solid fa-wrench"></i> Toggle Dev Tools</a>
+                    <a href="#"><i class="fa-solid fa-circle-info"></i> Help/Info</a>
+                    <a href="#"><i class="fa-solid fa-shuffle"></i> Bare Switcher</a>
+                </div>
             </div>
+            <button id="bookmark-btn">Bookmark</button>
         </div>
+        <div class="bookmarks-panel" id="bookmarks-panel">
+          <!-- Bookmarks will be  added here -->
+          <div class="bookmarks-dropdown" id="bookmarks-dropdown">
+              <!-- Additional bookmarks will be shown here as a dropdown -->
+          </div>
+      </div>
+      
+      <!-- The popup for adding bookmarks -->
+      <div class="bookmark-popup" id="bookmark-popup" style="width:50%; height:50%;">
+        <h2>Create A Bookmark</h2>
+          <input type="text" id="bookmark-title-input" placeholder="Bookmark Title">
+          <input type="text" id="bookmark-link-input" placeholder="Bookmark Link">
+          <div class="button-container">
+              <button id="bookmark-cancel">Cancel</button>
+              <button id="bookmark-confirm">Confirm</button>
+          </div>
+      </div>
         <div class="tab-panels">
             <div class="tab-panel active" data-src="https://ludicrous.icu/">
                 <iframe src="https://ludicrous.icu/" frameborder="0"></iframe>
@@ -45,14 +62,16 @@
         </div>
     </div>
     <div class="desc left-margin">
-      <p id="uv-error"></p>
-      <pre id="uv-error-code"></pre>
+        <p id="uv-error"></p>
+        <pre id="uv-error-code"></pre>
     </div>
+
     <script src="tab.js"></script>
     <script src="settings/js/index.js"></script>
     <script src="settings/js/panic.js"></script>
 </body>
 </html>
+
 
 <script>
   var searchEngineValue = localStorage.getItem("searchengine");
