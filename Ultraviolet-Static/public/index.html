@@ -22,7 +22,7 @@
             <button class="forward-btn"><i class="fas fa-chevron-right"></i></button>
             <form class="inputcontainermain" id="uv-form">
                 <input class="search" type="text" id="uv-address" placeholder="Type URL here">
-                <input style="z-index: -9999;" id="uv-search-engine" value="" type="hidden"/>
+                <input id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"/>
             </form>
             <div class="dropdown">
                 <button class="dropdown-button">
@@ -50,7 +50,7 @@
         <h2>Create A Bookmark</h2>
           <input type="text" id="bookmark-title-input" placeholder="Bookmark Title">
           <input type="text" id="bookmark-link-input" placeholder="Bookmark Link">
-          <div class="button-container">
+          <div class="button-container-bookmark ">
               <button id="bookmark-cancel">Cancel</button>
               <button id="bookmark-confirm">Confirm</button>
           </div>
@@ -99,18 +99,27 @@
       await registerServiceWorker();
     });
 
+    function changeTabSrc(src) {
+    const activeTabPanel = document.querySelector('.tab-panel.active');
+    if (activeTabPanel) {
+        const iframe = activeTabPanel.querySelector('iframe');
+        iframe.src = src;
+    }
+}
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      await registerServiceWorker();
-      const url = search(address.value, searchEngine.value);
-      const imgsrc = `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${url}&size=15`;
-      const faviconsrc = `<img src="${imgsrc}">`;
-      changeTabSrc(__uv$config.prefix + __uv$config.encodeUrl(url));
-      setTimeout(function() {
-        const activeTabPanel = document.querySelector('.tab-panel.active');
-        const iframe = activeTabPanel.querySelector('iframe');
-        iframe.addEventListener('load', updatefaviconagain);
-      }, 3000);
+      registerServiceWorker.then(() => {
+          const url = search(address.value, searchEngine.value);
+          const imgsrc = `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${url}&size=15`;
+          const faviconsrc = `<img src="${imgsrc}">`;
+          changeTabSrc(__uv$config.prefix + __uv$config.encodeUrl(url));
+          localStorage.removeItem("mainurl");
+          setTimeout(function() {
+            const activeTabPanel = document.querySelector('.tab-panel.active');
+            const iframe = activeTabPanel.querySelector('iframe');
+            iframe.addEventListener('load', updatefaviconagain);
+          }, 3000);
+        });
     });
 
     window.addEventListener("storage", (event) => {
@@ -120,6 +129,7 @@
           const imgsrc = `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${url}&size=15`;
           const faviconsrc = `<img src="${imgsrc}">`;
           changeTabSrc(__uv$config.prefix + __uv$config.encodeUrl(url));
+          localStorage.removeItem("mainurl");
           setTimeout(function() {
             const activeTabPanel = document.querySelector('.tab-panel.active');
             const iframe = activeTabPanel.querySelector('iframe');

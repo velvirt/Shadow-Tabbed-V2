@@ -130,7 +130,7 @@ function updateTabTitleFromIframe(iframe) {
         const imgsrc = `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${decodedsrc}&size=20`;
         const faviconsrc = `<img style="margin-right: 1px;" src="${imgsrc}">`;
         if (src.includes('home.html') || src.includes('main.html')) {
-        } else {
+        } else { 
             const iframeTitle = `<span style="margin-left: 1px;">${iframe.contentDocument.title}</span>`;
             activeTab.innerHTML = `${faviconsrc} ${iframeTitle} <span class="close-tab-btn"></span>`;
         }
@@ -217,29 +217,6 @@ window.addEventListener('load', function () {
     bookmarkBtn.addEventListener('click', bookmarkCurrentTab);
 });
 
-// Function to show the bookmark popup
-function showBookmarkPopup() {
-    const popup = document.getElementById('bookmark-popup');
-    popup.style.display = 'block';
-
-    // Get the current iframe src and set it as the default value for the bookmark inputs
-    const activeTabPanel = document.querySelector('.tab-panel.active');
-    const iframe = activeTabPanel.querySelector('iframe');
-    const bookmarkLinkInput = document.getElementById('bookmark-link-input');
-    const bookmarkTitleInput = document.getElementById('bookmark-title-input');
-    bookmarkLinkInput.value = iframe.src;
-    bookmarkTitleInput.value = iframe.title; // Set the default bookmark title as the title of the iframe src
-
-    // Confirm button functionality
-    const bookmarkConfirmBtn = document.getElementById('bookmark-confirm');
-    bookmarkConfirmBtn.removeEventListener('click', handleBookmarkConfirm); // Remove existing event listener
-    bookmarkConfirmBtn.addEventListener('click', handleBookmarkConfirm);
-
-    // Cancel button functionality
-    const bookmarkCancelBtn = document.getElementById('bookmark-cancel');
-    bookmarkCancelBtn.removeEventListener('click', handleBookmarkCancel); // Remove existing event listener
-    bookmarkCancelBtn.addEventListener('click', handleBookmarkCancel);
-}
 
 function isOverflowing(container, element) {
   return container.scrollWidth > container.clientWidth || element.offsetTop > container.clientHeight;
@@ -266,22 +243,21 @@ function addBookmark(title, link) {
         bookmark.innerHTML = '<i class="fa-sharp fa-solid fa-gear"> </i> ' + " " +  title;
       }
     }
-    if (link.includes('/uv/service/')) {
-      link = link.substring(link.indexOf('/uv/service/') + '/uv/service/'.length);
-      const decodedlink = __uv$config.decodeUrl(link);
-      const imgsrc = `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${decodedlink}&size=26`;
-      const faviconlink = `<img style="margin-right: 5px;" src="${imgsrc}">`;
-      bookmark.innerHTML = faviconlink + title;
+    if (!link.includes('home.html') && !link.includes('main.html') && !link.includes('/settings/')) {
+        const decodedlink = link;
+        const imgsrc = `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${decodedlink}&size=26`;
+        const faviconlink = `<img style="margin-right: 5px;" src="${imgsrc}">`;
+        bookmark.innerHTML = faviconlink + title;
     }
-  
-    bookmark.setAttribute('href', `/uv/service/${link}`);
-    bookmark.classList.add('bookmark-item');
-  
+    
+
+    bookmark.setAttribute('href', `/uv/service/${__uv$config.encodeUrl(link)}`);
+    bookmark.classList.add('bookmark-item');  
     bookmark.addEventListener('click', (event) => {
       event.preventDefault();
       const activeTabPanel = document.querySelector('.tab-panel.active');
       const iframe = activeTabPanel.querySelector('iframe');
-      iframe.src = link;
+      iframe.src = "/uv/service/" + link;
     });
   
     if (isOverflowing(bookmarksContainer, bookmark)) {
@@ -297,15 +273,18 @@ function showBookmarkPopup() {
     const popup = document.getElementById('bookmark-popup');
     popup.style.display = 'block';
 
-    // Get the current iframe src and set it as the default value for the bookmark inputs
     const activeTabPanel = document.querySelector('.tab-panel.active');
     const iframe = activeTabPanel.querySelector('iframe');
     const bookmarkLinkInput = document.getElementById('bookmark-link-input');
     const bookmarkTitleInput = document.getElementById('bookmark-title-input');
-    bookmarkLinkInput.value = iframe.src;
-    bookmarkTitleInput.value = iframe.title; // Set the default bookmark title as the title of the iframe src
+    let defaultlink = iframe.src;
+    if (defaultlink.includes('/uv/service/')) {
+      defaultlink = defaultlink.substring(defaultlink.indexOf('/uv/service/') + '/uv/service/'.length);
+      defaultlink = __uv$config.decodeUrl(defaultlink);
+    }
+    bookmarkLinkInput.value = defaultlink;
+    bookmarkTitleInput.value = iframe.contentDocument.title; 
 
-    // Confirm button functionality
     const bookmarkConfirmBtn = document.getElementById('bookmark-confirm');
     bookmarkConfirmBtn.removeEventListener('click', handleBookmarkConfirm); // Remove existing event listener
     bookmarkConfirmBtn.addEventListener('click', handleBookmarkConfirm);
@@ -322,7 +301,6 @@ function handleBookmarkConfirm() {
     const bookmarkLinkInput = document.getElementById('bookmark-link-input');
     const bookmarkTitle = bookmarkTitleInput.value;
     const bookmarkLink = bookmarkLinkInput.value;
-
     addBookmark(bookmarkTitle, bookmarkLink);
 
     // Close the popup
@@ -330,18 +308,6 @@ function handleBookmarkConfirm() {
     popup.style.display = 'none';
 }
 
-function handleBookmarkConfirm() {
-  const bookmarkTitleInput = document.getElementById('bookmark-title-input');
-  const bookmarkLinkInput = document.getElementById('bookmark-link-input');
-  const bookmarkTitle = bookmarkTitleInput.value;
-  const bookmarkLink = bookmarkLinkInput.value;
-
-  addBookmark(bookmarkTitle, bookmarkLink);
-
-  // Close the popup
-  const popup = document.getElementById('bookmark-popup');
-  popup.style.display = 'none';
-}
 
 function handleBookmarkCancel() {
   // Close the popup
@@ -368,13 +334,7 @@ createBookmarks();
 
 
 document.addEventListener('DOMContentLoaded', createBookmarks);
-function changeTabSrc(src) {
-    const activeTabPanel = document.querySelector('.tab-panel.active');
-    if (activeTabPanel) {
-        const iframe = activeTabPanel.querySelector('iframe');
-        iframe.src = src;
-    }
-}
+
 
 function updatefaviconagain() {
     const activeTabPanel = document.querySelector('.tab-panel.active');
@@ -397,3 +357,11 @@ function calculateServerPing(serverURL) {
 
 // Initialize tabs
 initTabs();
+
+function changeTabSrc(src) {
+    const activeTabPanel = document.querySelector('.tab-panel.active');
+    if (activeTabPanel) {
+        const iframe = activeTabPanel.querySelector('iframe');
+        iframe.src = src;
+    }
+}

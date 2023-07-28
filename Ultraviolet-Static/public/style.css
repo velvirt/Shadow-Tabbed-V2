@@ -251,31 +251,6 @@ iframe {
     text-overflow: ellipsis;
 }
 
-.bookmarks-dropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    width: 100%;
-    background-color: #f0f0f0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    overflow-y: auto;
-    display: none;
-    border-radius: 5px; /* Add border-radius to the bookmarks dropdown */
-}
-
-/* Style for the bookmarks dropdown links */
-.bookmarks-dropdown a {
-    display: block;
-    padding: 5px;
-    text-decoration: none;
-    color: #2a2a3d;
-    transition: background-color 0.3s;
-}
-
-.bookmarks-dropdown a:hover {
-    background-color: #5B3A75;
-}
 
 #bookmarks-panel:hover .bookmarks-dropdown {
     display: block; 
@@ -286,6 +261,7 @@ iframe {
     position: fixed;
     top: 50%;
     left: 50%;
+    text-align: center;
     width:400px;
     height:400px;
     transform: translate(-50%, -50%);
@@ -320,6 +296,8 @@ iframe {
 .bookmark-popup button {
     padding: 8px 16px;
     border: none;
+    align-self: center;
+    text-align: center;
     border-radius: 5px;
     background-color: #6B52A3; /* Button background color */
     color: #fff; /* Button text color */

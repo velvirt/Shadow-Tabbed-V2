@@ -18,8 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
-        const url = search(address.value, searchEngine.value);
-        localStorage.setItem("mainurl", url)
+        await registerServiceWorker;
+        const url = search(address.value, "https://www.google.com/search?q=%s");
+        localStorage.setItem("mainurl", url);
     });
 
     const discord = document.getElementById('discord');
