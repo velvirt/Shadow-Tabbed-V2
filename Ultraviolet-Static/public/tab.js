@@ -219,122 +219,122 @@ window.addEventListener('load', function () {
 
 
 function isOverflowing(container, element) {
-  return container.scrollWidth > container.clientWidth || element.offsetTop > container.clientHeight;
-}
-
-function addBookmark(title, link) {
-    const bookmarksContainer = document.getElementById('bookmarks-panel');
-    const bookmarksOverflow = document.getElementById('bookmarks-overflow');
-  
-    const bookmark = document.createElement('a');
-  
-    if (link.startsWith(window.location.origin)) {
-      link = link.substring(window.location.origin.length);
-    }
-  
-    if (link.includes('main.html') || link.includes('home.html') || link.includes('/settings/')) {
-      if (link.includes('home.html')){
-        bookmark.innerHTML = "<i class='fa-solid fa-house'>  </i> " + " " +  title;
-      }
-      if (link.includes('main.html')){
-        bookmark.innerHTML = '<i class="fas fa-globe"> </i>  ' + " " +  title;
-      }
-      if (link.includes('/settings/')){
-        bookmark.innerHTML = '<i class="fa-sharp fa-solid fa-gear"> </i> ' + " " +  title;
-      }
-    }
-    if (!link.includes('home.html') && !link.includes('main.html') && !link.includes('/settings/')) {
-        const decodedlink = link;
-        const imgsrc = `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${decodedlink}&size=26`;
-        const faviconlink = `<img style="margin-right: 5px;" src="${imgsrc}">`;
-        bookmark.innerHTML = faviconlink + title;
-    }
-    
-
-    bookmark.setAttribute('href', `/uv/service/${__uv$config.encodeUrl(link)}`);
-    bookmark.classList.add('bookmark-item');  
-    bookmark.addEventListener('click', (event) => {
-      event.preventDefault();
-      const activeTabPanel = document.querySelector('.tab-panel.active');
-      const iframe = activeTabPanel.querySelector('iframe');
-      iframe.src = "/uv/service/" + link;
-    });
-  
-    if (isOverflowing(bookmarksContainer, bookmark)) {
-      bookmarksOverflow.appendChild(bookmark);
-      bookmarksOverflow.classList.add('show');
-    } else {
-      bookmarksContainer.appendChild(bookmark);
-    }
+    return container.scrollWidth > container.clientWidth || element.offsetTop > container.clientHeight;
   }
   
-
-function showBookmarkPopup() {
-    const popup = document.getElementById('bookmark-popup');
-    popup.style.display = 'block';
-
-    const activeTabPanel = document.querySelector('.tab-panel.active');
-    const iframe = activeTabPanel.querySelector('iframe');
-    const bookmarkLinkInput = document.getElementById('bookmark-link-input');
-    const bookmarkTitleInput = document.getElementById('bookmark-title-input');
-    let defaultlink = iframe.src;
-    if (defaultlink.includes('/uv/service/')) {
-      defaultlink = defaultlink.substring(defaultlink.indexOf('/uv/service/') + '/uv/service/'.length);
-      defaultlink = __uv$config.decodeUrl(defaultlink);
-    }
-    bookmarkLinkInput.value = defaultlink;
-    bookmarkTitleInput.value = iframe.contentDocument.title; 
-
-    const bookmarkConfirmBtn = document.getElementById('bookmark-confirm');
-    bookmarkConfirmBtn.removeEventListener('click', handleBookmarkConfirm); // Remove existing event listener
-    bookmarkConfirmBtn.addEventListener('click', handleBookmarkConfirm);
-
-    // Cancel button functionality
-    const bookmarkCancelBtn = document.getElementById('bookmark-cancel');
-    bookmarkCancelBtn.removeEventListener('click', handleBookmarkCancel); // Remove existing event listener
-    bookmarkCancelBtn.addEventListener('click', handleBookmarkCancel);
-}
-
-// Function to handle the bookmark confirm button click
-function handleBookmarkConfirm() {
-    const bookmarkTitleInput = document.getElementById('bookmark-title-input');
-    const bookmarkLinkInput = document.getElementById('bookmark-link-input');
-    const bookmarkTitle = bookmarkTitleInput.value;
-    const bookmarkLink = bookmarkLinkInput.value;
-    addBookmark(bookmarkTitle, bookmarkLink);
-
-    // Close the popup
-    const popup = document.getElementById('bookmark-popup');
-    popup.style.display = 'none';
-}
-
-
-function handleBookmarkCancel() {
-  // Close the popup
-  const popup = document.getElementById('bookmark-popup');
-  popup.style.display = 'none';
-}
-
-// Call the function to show the bookmark popup when the bookmark button is clicked
-bookmarkBtn.addEventListener('click', showBookmarkPopup);
-
-// Function to create bookmarks (if you have a list of initial bookmarks)
-function createBookmarks() {
-    const bookmarks = [
-
-    ];
-
-    bookmarks.forEach((bookmark) => {
-        addBookmark(bookmark.title, bookmark.link);
-    });
-}
-
-// Call the function to create initial bookmarks (if needed)
-createBookmarks();
-
-
-document.addEventListener('DOMContentLoaded', createBookmarks);
-
+  function addBookmarkToLocalStorage(title, link) {
+      const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+      bookmarks.push({ title, link });
+      localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+  }
+  
+  function addBookmark(title, link) {
+      const bookmarksContainer = document.getElementById('bookmarks-panel');
+      const bookmarksOverflow = document.getElementById('bookmarks-overflow');
+  
+      const bookmark = document.createElement('a');
+  
+      if (link.startsWith(window.location.origin)) {
+          link = link.substring(window.location.origin.length);
+      }
+  
+      if (link.includes('main.html') || link.includes('home.html') || link.includes('/settings/')) {
+          if (link.includes('home.html')){
+              bookmark.innerHTML = "<i class='fa-solid fa-house'>  </i> " + " " +  title;
+          }
+          if (link.includes('main.html')){
+              bookmark.innerHTML = '<i class="fas fa-globe"> </i>  ' + " " +  title;
+          }
+          if (link.includes('/settings/')){
+              bookmark.innerHTML = '<i class="fa-sharp fa-solid fa-gear"> </i> ' + " " +  title;
+          }
+      } else {
+          const decodedlink = link;
+          const imgsrc = `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${decodedlink}&size=26`;
+          const faviconlink = `<img style="margin-right: 5px;" src="${imgsrc}">`;
+          bookmark.innerHTML = faviconlink + title;
+          const encodedlink = `/uv/service/` + __uv$config.encodeUrl(link);
+          bookmark.setAttribute('onclick', `changeTabSrc('${encodedlink}')`);
+      }
+  
+      bookmark.classList.add('bookmark-item');
+      bookmark.addEventListener('click', (event) => {
+          event.preventDefault();
+          const activeTabPanel = document.querySelector('.tab-panel.active');
+          const iframe = activeTabPanel.querySelector('iframe');
+      });
+  
+      if (isOverflowing(bookmarksContainer, bookmark)) {
+          bookmarksOverflow.appendChild(bookmark);
+          bookmarksOverflow.classList.add('show');
+      } else {
+          bookmarksContainer.appendChild(bookmark);
+      }
+  
+      // Save the bookmark to localStorage
+      addBookmarkToLocalStorage(title, link);
+  }
+  
+  function showBookmarkPopup() {
+      const popup = document.getElementById('bookmark-popup');
+      popup.style.display = 'block';
+  
+      const activeTabPanel = document.querySelector('.tab-panel.active');
+      const iframe = activeTabPanel.querySelector('iframe');
+      const bookmarkLinkInput = document.getElementById('bookmark-link-input');
+      const bookmarkTitleInput = document.getElementById('bookmark-title-input');
+      let defaultlink = iframe.src;
+      if (defaultlink.includes('/uv/service/')) {
+          defaultlink = defaultlink.substring(defaultlink.indexOf('/uv/service/') + '/uv/service/'.length);
+          defaultlink = __uv$config.decodeUrl(defaultlink);
+      }
+      bookmarkLinkInput.value = defaultlink;
+      bookmarkTitleInput.value = iframe.contentDocument.title; 
+  
+      const bookmarkConfirmBtn = document.getElementById('bookmark-confirm');
+      bookmarkConfirmBtn.removeEventListener('click', handleBookmarkConfirm); // Remove existing event listener
+      bookmarkConfirmBtn.addEventListener('click', handleBookmarkConfirm);
+  
+      // Cancel button functionality
+      const bookmarkCancelBtn = document.getElementById('bookmark-cancel');
+      bookmarkCancelBtn.removeEventListener('click', handleBookmarkCancel); // Remove existing event listener
+      bookmarkCancelBtn.addEventListener('click', handleBookmarkCancel);
+  }
+  
+  // Function to handle the bookmark confirm button click
+  function handleBookmarkConfirm() {
+      const bookmarkTitleInput = document.getElementById('bookmark-title-input');
+      const bookmarkLinkInput = document.getElementById('bookmark-link-input');
+      const bookmarkTitle = bookmarkTitleInput.value;
+      const bookmarkLink = bookmarkLinkInput.value;
+      addBookmark(bookmarkTitle, bookmarkLink);
+  
+      // Close the popup
+      const popup = document.getElementById('bookmark-popup');
+      popup.style.display = 'none';
+  }
+  
+  function handleBookmarkCancel() {
+      // Close the popup
+      const popup = document.getElementById('bookmark-popup');
+      popup.style.display = 'none';
+  }
+  
+  // Call the function to show the bookmark popup when the bookmark button is clicked
+  bookmarkBtn.addEventListener('click', showBookmarkPopup);
+  
+  // Function to retrieve saved bookmarks from localStorage and create them
+  function createBookmarks() {
+      const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+  
+      bookmarks.forEach((bookmark) => {
+          addBookmark(bookmark.title, bookmark.link);
+      });
+  }
+  
+  // Call the function to create initial bookmarks (if needed) when the page is loaded
+  document.addEventListener('DOMContentLoaded', createBookmarks);
+  
 
 function updatefaviconagain() {
     const activeTabPanel = document.querySelector('.tab-panel.active');
