@@ -53,6 +53,9 @@ function addTab(title, src) {
     // Add event listeners for the newly created iframe
     const iframe = newTabPanel.querySelector('iframe');
     updateTabTitleFromIframe(iframe);
+    iframe.addEventListener('load', function () {
+        updateTabTitleFromIframe(iframe);
+    });
 }
 
 function showTab(panelId) {
@@ -123,11 +126,11 @@ function updateTabTitleFromIframe(iframe) {
         const src = iframe.src;
         const encodedurl = src.split('/uv/service/')[1];
         const decodedsrc = __uv$config.decodeUrl(encodedurl);
-        const imgsrc = `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${decodedsrc}&size=24`;
-        const faviconsrc = `<img style="margin-right: 10px;" src="${imgsrc}">`;
+        const imgsrc = `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${decodedsrc}&size=20`;
+        const faviconsrc = `<img style="margin-right: 1px;" src="${imgsrc}">`;
         if (src.includes('home.html') || src.includes('main.html')) {
         } else {
-            const iframeTitle = `<span style="margin-left: 10px;">${iframe.contentDocument.title}</span>`;
+            const iframeTitle = `<span style="margin-left: 1px;">${iframe.contentDocument.title}</span>`;
             activeTab.innerHTML = `${faviconsrc} ${iframeTitle} <span class="close-tab-btn"></span>`;
         }
     }
@@ -194,17 +197,25 @@ function initTabs() {
     showTab('panel1');
     saveInputs('panel1');
     addTab('<i class="fa-solid fa-house"></i> Home', "home.html"); // Add the Home tab on load
+    
     const iframes = document.querySelectorAll('.tab-panel iframe');
     iframes.forEach(iframe => {
         updateTabTitleFromIframe(iframe);
+        iframe.addEventListener('load', function () {
+            updateTabTitleFromIframe(iframe);
+        });
     });
 }
+
 
 // Handle window resize to adjust the tabs
 window.addEventListener('resize', function () {
     resizeTabs();
 });
 
+window.addEventListener('load', function () {
+    addTab("<i class='fa-solid fa-house'></i> Home", 'home.html')
+});
 // Initialize tabs
 initTabs();
 
@@ -216,4 +227,11 @@ function changeTabSrc(src) {
     }
 }
 
+function updatefaviconagain(){
+    const activeTabPanel = document.querySelector('.tab-panel.active');
+        if (activeTabPanel) {
+            const iframe = activeTabPanel.querySelector('iframe'); 
+            updateTabTitleFromIframe(iframe)
+        }    
+}
 

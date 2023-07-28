@@ -17,11 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      await registerServiceWorker;
-  
-      const url = search(address.value, searchEngine.value);
-      location.href = __uv$config.prefix + __uv$config.encodeUrl(url);
+        event.preventDefault();
+        const url = search(address.value, searchEngine.value);
+        localStorage.setItem("mainurl", url)
     });
 
     const discord = document.getElementById('discord');

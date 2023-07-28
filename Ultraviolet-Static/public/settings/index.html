@@ -1,118 +1,134 @@
 <!DOCTYPE html>
-<html style="border:none; border-width: 0px;" id="html">
+<html id="html">
 <head>
   <title>Shadow Settings</title>
-  <link id="themeStylesheet" rel="stylesheet" type="text/css" href="/CSS/index.css" >
+  <link rel="stylesheet" type="text/css" href="index.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="/menu.js"> </script>
   <link rel="icon" type="image/png"  href="">
 </head>
-<body class="settingsbody" style="border:none; border-width: 0px;">
-  <div class="flex-center">
-    <div class="category-row">
-        <div class="category">
-            <h2>Search Engine</h2>
-            <select id="searchEngineDropdown">
-              <option value="">Select an option</option>
-              <option value="google">Google</option>
-              <option value="bing">Bing</option>
-              <option value="yahoo">Yahoo</option>
-              <option value="duckduckgo">DuckDuckGo</option>
-              <option value="brave">Brave</option>
-              <option value="yandex">Yandex</option>
-            </select>
-          </div>          
-          <div class="category">
-            <h2>About:Blank</h2>
-            <div>
-              <button onclick="openNewWindow()" style="width:300px" >Open in New Window</button> <br><br>
-              <button onclick="openNewTab()" style="width:300px" >Open in New Tab</button>
-            </div>
-          </div>          
-    </div>
-    <div class="category-row">
-      <div class="category">
-        <h2 style="margin-bottom: -16px;">Tab Cloak</h2>
-        <div class="section-content">
-          <div class="buttons">
-            <input id="title" class="input" placeholder="Title" onkeyup="setTitle(this.value)" />
-            <input id="icon" class="input" placeholder="Favicon" onkeyup="setFavicon(this.value.trim())" />
-          </div>
-          <p class="section-text">Ready Made Cloaks</p>
-          <div class="buttons">
-            <select name="Readymade Cloaks" id="premadecloaks" title="Cloaks">
-              <option value="search">Google Search</option>
-              <option value="drive">Google Drive</option>
-              <option value="youtube">YouTube</option>
-              <option value="gmail">Gmail</option>
-              <option value="calendar">Google Calendar</option>
-              <option value="meets">Google Meet</option>
-              <option value="classroom">Google Classroom</option>
-              <option value="canvas">Canvas</option>
-              <option value="zoom">Zoom</option>
-              <option value="khan">Khan Academy</option>
-            </select>
-            <div class="select-buttons">
-              <button class="button button2" onclick="setCloak()">Set</button>
-              <button class="button button2" onclick="resetTab()">Reset</button>
-            </div>
+<body class="settingsbody">
+  <div class="container">
+    <div class="settings-section">
+      <h2 class="section-title">Search Engine</h2>
+      <p>This will be the search engine that is used when searching the web using proxies. Either choose one of our pre-made options, or set your own!</p>
+      <select id="searchEngineDropdown" class="input-field">
+        <option value="custom">Custom</option>
+        <option value="google">Google</option>
+        <option value="bing">Bing</option>
+        <option value="yahoo">Yahoo</option>
+        <option value="duckduckgo">DuckDuckGo</option>
+        <option value="brave">Brave</option>
+        <option value="yandex">Yandex</option>
+      </select>
+      <div id="customsearchengdiv" style="display: none;">
+        <p>Enter the root of the search below. <br> Example: https://www.google.com/search?q=</p>
+        <input id="searchengine" class="input-field" placeholder="Enter Search Engine Root" onkeyup="toggleCustomSearch()" />
+      </div>
+    </div>            
+    <div class="settings-section">
+      <div class="section-title">Launch About:blank</div>
+      <div class="section-content">
+          <p>Click the button to open a new tab with about:blank. About:Blank opens this site as an about:blank, and you can browse this site all you want. Now instead of this website appearing in your histroy, it will just show about:blank</p>
+      </div>
+          <button class="icon-button"><i class="fas fa-rocket"></i> Launch</button>
+    </div>         
+    <div class="settings-section">
+      <h2 class="section-title">Tab Cloak</h2>
+      <div class="section-content">
+        <div class="buttons">
+          <input id="title" class="input-field" placeholder="Title" onkeyup="setTitle(this.value)" />
+          <input id="icon" class="input-field" placeholder="Favicon" onkeyup="setFavicon(this.value.trim())" />
+        </div>
+        <p class="section-content">Ready Made Cloaks</p>
+        <div class="buttons">
+          <select name="Readymade Cloaks" id="premadecloaks" class="input-field" title="Cloaks">
+            <option value="search">Google Search</option>
+            <option value="drive">Google Drive</option>
+            <option value="youtube">YouTube</option>
+            <option value="gmail">Gmail</option>
+            <option value="calendar">Google Calendar</option>
+            <option value="meets">Google Meet</option>
+            <option value="classroom">Google Classroom</option>
+            <option value="canvas">Canvas</option>
+            <option value="zoom">Zoom</option>
+            <option value="khan">Khan Academy</option>
+          </select>
+          <div class="select-buttons">
+            <button class="icon-button" onclick="setCloak()"><i class="fas fa-cogs"></i> Set</button>
+            <button class="icon-button" onclick="resetTab()"><i class="fas fa-undo-alt"></i> Reset</button>
           </div>
         </div>
       </div>
-      <div class="category">
-        <h2 style="margin-top: -125px;">Themes</h2>
-        <div class="section-content" style="margin-top:-20px">
-          <div class="theme-buttons">
-            <button class="button button2"  onclick="changeTheme('/CSS/index.css')"  >Default</button>
-            <button onclick="changeTheme('/CSS/themes/light.css')"  class="button button2">Light</button>
-            <button onclick="changeTheme('/CSS/themes/poop.css')"  class="button button2">Poop </button>
-            <button onclick="changeTheme('/CSS/themes/fracital.css')"  class="button button2">Fracital </button>
-          </div>
-        </div>
-      </div>      
     </div>
+    <div class="settings-section">
+      <h2 class="section-title">Themes</h2>
+      <div class="section-content">
+        <p class="section-text">Click on one of the buttons below to change your theme. This will change how the appearance of the site, letting you customize your experience. <br> 
+        </p>
+        <div class="button-section ">
+          <button class="icon-button" onclick="changeTheme('/CSS/index.css')">Default</button>
+          <button class="icon-button" onclick="changeTheme('/CSS/themes/light.css')">Light</button>
+          <button class="icon-button" onclick="changeTheme('/CSS/themes/poop.css')">Poop</button>
+          <button class="icon-button" onclick="changeTheme('/CSS/themes/fracital.css')">Fracital</button>
+        </div> <br>
+        <p style="font-size: 16.5px;color:#d70f0f"><i class="fa-solid fa-x fa-lg" style="color: #d70f0f;"></i> This feature has been disabled due to ongoing updates</p>
+      </div>
+    </div>       
   </div>
-
   <script src="script.js"></script>
-
 </body>
 
 
 <script>
-// Function to handle dropdown change event and set the search engine value in local storage
-function setSearchEngine(value) {
-  localStorage.setItem("searchengine", value);
-}
-
-// Add change event listener to the dropdown
-document.getElementById("searchEngineDropdown").addEventListener("change", function() {
-  var selectedEngine = this.value;
-  switch (selectedEngine) {
-    case "google":
-      setSearchEngine("https://www.google.com/search?q=%s");
-      break;
-    case "bing":
-      setSearchEngine("https://www.bing.com/search?form=&q=%s");
-      break;
-    case "yahoo":
-      setSearchEngine("https://search.yahoo.com/search?p=%s");
-      break;
-    case "duckduckgo":
-      setSearchEngine("https://duckduckgo.com/?q=%s");
-      break;
-    case "brave":
-      setSearchEngine("https://search.brave.com/search?q=%s");
-      break;
-    case "yandex":
-      setSearchEngine("https://www.yandex.com/search/?text=%s");
-      break;
-    default:
-      localStorage.removeItem("searchengine");
-      break;
+  // Function to handle dropdown change event and set the search engine value in local storage
+  function setSearchEngine(value) {
+    localStorage.setItem("searchengine", value);
   }
-});
- </script>
-
+  
+  function toggleCustomSearch() {
+    var customDiv = document.getElementById("customsearchengdiv");
+    var searchEngineDropdown = document.getElementById("searchEngineDropdown");
+    if (searchEngineDropdown.value === "custom") {
+      customDiv.style.display = "block";
+      var customSearchValue = document.getElementById("searchengine").value;
+      setSearchEngine(customSearchValue);
+    } else {
+      customDiv.style.display = "none";
+      switch (searchEngineDropdown.value) {
+        case "google":
+          setSearchEngine("https://www.google.com/search?q=%s");
+          break;
+        case "bing":
+          setSearchEngine("https://www.bing.com/search?form=&q=%s");
+          break;
+        case "yahoo":
+          setSearchEngine("https://search.yahoo.com/search?p=%s");
+          break;
+        case "duckduckgo":
+          setSearchEngine("https://duckduckgo.com/?q=%s");
+          break;
+        case "brave":
+          setSearchEngine("https://search.brave.com/search?q=%s");
+          break;
+        case "yandex":
+          setSearchEngine("https://www.yandex.com/search/?text=%s");
+          break;
+        default:
+          localStorage.removeItem("searchengine");
+          break;
+      }
+    }
+  }
+  
+  // Add change event listener to the dropdown
+  document.getElementById("searchEngineDropdown").addEventListener("change", toggleCustomSearch);
+  
+  // Show/hide the custom search engine div on initial page load
+  toggleCustomSearch();
+  </script>
+  
+  
 <script>
   function openNewTab() {
     const currentURL = window.location.origin;
@@ -148,33 +164,6 @@ document.getElementById("searchEngineDropdown").addEventListener("change", funct
 });
 </script>
 
-<div id="custom-menu">
-  <ul>
-    <div id="section">
-      <li onclick="copy()"><a><i class="fa-solid fa-copy"></i>Copy</a></li>
-      <li onclick="paste()"><a><i class="fa-solid fa-paste"></i> Paste</a></li>
-      <li onclick="selectAll()"><a><i class="fa-sharp fa-solid fa-border-all"></i>Select All</a></li>
-    </div>
-    <div id="section">
-      <li onclick="openSettings()"><a><i class="fa-sharp fa-solid fa-gear fa-lg" id="settings"></i>Open Settings</a></li>
-      <li onclick="openDiscord()"><a><i class="fa-brands fa-discord fa-lg"></i>Open Discord</a></li>
-      <li onclick="openIframeInNewTab()"><a><i class="fa-solid fa-arrow-up-right-from-square fa-lg" id="openiframe"></i>Open Tab Content In A New Tab</a></li>
-      <li onclick="devtooltoggle()"><a><i class="fa-solid fa-wrench fa-lg" id="devbtn"></i>Toggle Dev Tools</a></li>    
-    </div>
-    <div id="section">
-      <li onclick="openNewTab()"><a><i class="fa-solid fa-lock"></i>Launch About:Blank in New Tab</a></li>
-      <li onclick="openNewWindow()"><a><i class="fa-solid fa-lock"></i>Launch About:Blank in New Window</a></li>
-    </div>
-    <div id="section">
-      <li onclick="navigateForward()"><a><i class="fa-sharp fa-solid fa-arrow-right fa-lg" id="forward"></i>Forward</a></li>
-      <li onclick="navigateBack()"><a><i class="fa-solid fa-arrow-left fa-lg" id="back"></i> Back</a></li>
-      <li onclick="reloadIframe()"><a><i class="fa-solid fa-rotate-right fa-lg" id="reload"></i>Reload</a></li>
-    </div>
-    <div id="section">
-      <li onclick="Fullscreen()"><a> <i class="fa-solid fa-expand fa-lg" id="full-btn"></i>Fullscreen </a></li>
-    </div>
-  </ul>
-</div>
 <div id="content"></div>
 <script src="menu.js"> </script>
 <script src="tab.js"> </script>

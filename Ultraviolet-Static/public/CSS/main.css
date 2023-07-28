@@ -1,133 +1,160 @@
-.mainbody {
-  background-color: #1a1a32;
-  margin-top: -2%;
-  overflow: auto;
-  padding:0;
-  font-family: Arial, sans-serif;
+body {
+  font-family: "Comfortaa", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #1a1a2b;
+  color: #fff;
+  overflow: hidden;
 }
 
 .mainheading {
-  background-color: #1a1a32;
-  padding: 10px;
-  margin-top: 10.5%;
-  z-index:-1000;
   text-align: center;
 }
 
 .heading {
-  font-size: 70px;
-  margin-top: 10.5%;
-  color: #ffffff;
-  margin: 20px 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 90px;
+  margin-top: 1%;
+  text-transform: none;
 }
 
 .search-container {
   display: flex;
   flex-direction: column;
+  margin-top: -7%;
   align-items: center;
-  margin-top:-15.5%;
-  justify-content: center;
-  height: 80vh;
 }
 
-#uv-address {
-  border: 1px solid #383858;
-  border-radius: 24px;
-  height: 36px;
-  width: 500px;
-  padding: 6px 12px;
-  font-size: 16px;
-  font-family: Arial, sans-serif;
-  background-color: #212139;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-  color: #ffffff;
+#uv-form {
+  position: relative;
 }
 
-#uv-address:focus{
+
+.mainurl {
+  font-family: "Exo 2", sans-serif;
+  font-size: 20px;
+  padding: 8px;
+  border: 1px solid #6B52A3;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  width: 300px;
+  background-color: #3b3b5c;
+  color: #fff;
+}
+
+.mainurl:focus{
   outline:none;
+  border-width: 2px;
 }
 
 .shortcuts {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-gap: 10px;
-  margin-top: 20px;
+  grid-gap: 15px;
+  justify-content: center;
 }
 
 .shortcuts a {
-  text-decoration: none;
-  color: #ffffff;
-  border-radius: 5px;
   display: flex;
   flex-direction: column;
-  font-family: 'Nunito', sans-serif;
-  padding-top:3px;
-  padding-bottom: 3px;
   align-items: center;
-  transition: transform 0.3s ease-in-out;
-}
-
-.shortcuts a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  transform: translateY(-5px);
+  text-decoration: none;
+  color: #fff;
+  background-color: #2e2e4c;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100px;
 }
 
 .shortcuts img {
-  width: auto;
-  height: 50px;
-  margin-bottom: 5px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
 }
 
 .shortcuts span {
+  margin-top: 10px;
+  font-family: "Exo 2", sans-serif;
   font-size: 14px;
-  font-weight: normal;
-  font-family: 'Nunito', sans-serif;
 }
 
-#suggestions-list {
-  list-style-type: none;
-  padding: 0;
+.shortcuts a:hover {
+  background-color: #6B52A3;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+#custom-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+}
+
+#custom-menu ul {
   position: absolute;
-  top: 53.5%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  opacity: 1;
-  z-index: 9999;
-  color:#333;
+  list-style: none;
+  padding: 0;
+}
+
+#custom-menu li {
+  margin: 10px 0;
+}
+
+#custom-menu li a {
+  color: #fff;
+  text-decoration: none;
+  font-family: "Exo 2", sans-serif;
+}
+
+#custom-menu li a i {
+  margin-right: 5px;
+}
+
+#custom-menu li:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 8px 15px;
   border-radius: 5px;
-  background-color: #212139;
-  align-items: center;
-  width: 30%;
-}
-
-.suggestion-item {
-  padding: 10px;
-  z-index: 9999;
-  color: #ffffff;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-  text-transform: capitalize;
-  margin-bottom: 5px;
 }
 
-
-.suggestion-item:hover {
-  background-color: #3a2967;
-  text-transform: capitalize;
+#custom-menu li:hover a {
+  color: #fff;
 }
 
-
-.suggestion-item span {
-  color: #ffffff;
-  text-transform: capitalize;
-  font-family: 'Nunito', sans-serif;
-  font-size: 16px;
+#custom-menu li:focus {
+  outline: none;
 }
 
-.suggestion-item .suggestion-url {
-  color: #aaaaaa;
-  text-transform: capitalize;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
+#custom-menu li:focus a {
+  color: #fff;
+}
+
+#content {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 20px;
+  color: #fff;
+  font-family: "Exo 2", sans-serif;
+}
+
+#section {
+  margin-right: 20px;
+  display: inline-block;
+}
+
+#uv-search-engine {
+  display: none;
+}
+
+#uv-search-engine[value^="https://www.google.com"] {
+  display: block;
 }

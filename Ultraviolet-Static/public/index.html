@@ -9,6 +9,7 @@
     <script src="register-sw.js" defer></script>
     <script src="search.js" defer></script>
     <script src="index.js" defer></script>
+    <script src="options.js" defer></script>
 </head>
 <body onload="addTab(`<i class='fa-solid fa-house'></i> Home`, 'home.html');">
     <div class="tab-container">
@@ -22,7 +23,7 @@
                 <button class="forward-btn"><i class="fas fa-chevron-right"></i></button>    
               <form class="inputcontainermain" id="uv-form">
                 <input class="search" type="text" id="uv-address" placeholder="Type URL here">
-                <input style="z-index: -9999;" id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"/>
+                <input style="z-index: -9999;" id="uv-search-engine" value="" type="hidden"/>
               </form>
               <div class="dropdown">
                 <button class="dropdown-button">
@@ -30,7 +31,7 @@
                 </button>
               <div class="dropdown-content">
                 <a href="#"><i class="fa-solid fa-user-ninja"></i> About:Blank</a>
-                <a href="#"><i class="fa-solid fa-gear"></i> Settings</a>
+                <a onclick="settingoptions()"><i class="fa-solid fa-gear"></i> Settings</a>
                 <a href="#"><i class="fa-solid fa-wrench"></i> Toggle Dev Tools</a>
                 <a href="#"><i class="fa-solid fa-circle-info"></i> Help/Info</a>
                 <a href="#"><i class="fa-solid fa-shuffle"></i> Bare Switcher</a>
@@ -48,6 +49,8 @@
       <pre id="uv-error-code"></pre>
     </div>
     <script src="tab.js"></script>
+    <script src="settings/js/index.js"></script>
+    <script src="settings/js/panic.js"></script>
 </body>
 </html>
 
@@ -59,14 +62,14 @@
   document.getElementById("uv-search-engine").value = searchEngineValue;
   </script>
 
-  <script>
-document.addEventListener("DOMContentLoaded", () => {
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("uv-form");
     const address = document.getElementById("uv-address");
     const searchEngine = document.getElementById("uv-search-engine");
     const error = document.getElementById("uv-error");
     const errorCode = document.getElementById("uv-error-code");
-  
+
     const registerServiceWorker = registerSW().catch((err) => {
       error.textContent = "Failed to register service worker.";
       errorCode.textContent = err.toString();
@@ -74,20 +77,37 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     window.addEventListener('load', async () => {
-        await registerServiceWorker();
-      });
+      await registerServiceWorker();
+    });
 
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      await registerServiceWorker();
+      const url = search(address.value, searchEngine.value);
+      const imgsrc = `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${url}&size=15`;
+      const faviconsrc = `<img src="${imgsrc}">`;
+      changeTabSrc(__uv$config.prefix + __uv$config.encodeUrl(url));
+      setTimeout(function() {
+        const activeTabPanel = document.querySelector('.tab-panel.active');
+        const iframe = activeTabPanel.querySelector('iframe');
+        iframe.addEventListener('load', updatefaviconagain);
+      }, 3000);
+    });
 
-form.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  await registerServiceWorker;  
-  const url = search(address.value, searchEngine.value);
-  const imgsrc = `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${url}&size=15`;
-  const faviconsrc = `<img src="${imgsrc}">`;
-  changeTabSrc(__uv$config.prefix + __uv$config.encodeUrl(url));
-  setTimeout(function() {
-
-  }, 3000);
-});
-});
+    window.addEventListener("storage", (event) => {
+      if (event.key === "mainurl") {
+        registerServiceWorker.then(() => {
+          const url = search(address.value, searchEngine.value);
+          const imgsrc = `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${url}&size=15`;
+          const faviconsrc = `<img src="${imgsrc}">`;
+          changeTabSrc(__uv$config.prefix + __uv$config.encodeUrl(url));
+          setTimeout(function() {
+            const activeTabPanel = document.querySelector('.tab-panel.active');
+            const iframe = activeTabPanel.querySelector('iframe');
+            iframe.addEventListener('load', updatefaviconagain);
+          }, 3000);
+        });
+      }
+    });
+  });
 </script>
