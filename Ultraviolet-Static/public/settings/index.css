@@ -15,16 +15,16 @@ body {
 }
 
 .settings-section {
-  width: calc(30.33% - 20px);
+  flex: 0 0 calc(30.33% - 20px);
   margin: 10px;
   padding: 20px;
   background-color: #2e2e4c;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  display: inline-block;
   vertical-align: top;
   transition: transform 0.3s;
 }
+
 
 .settings-section:hover {
   transform: translateY(-5px);
@@ -34,7 +34,7 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-top: -10px;
 }
 
 .section-content {
@@ -76,4 +76,88 @@ body {
   align-items: center;
   align-content: center;
   align-self: center;
+}
+
+.box-container {
+  align-items: center;
+  padding: 10px;
+  margin-top: -15px;
+}
+
+/* Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* CSS styles */
+.box {
+  width: 200px;
+  max-height: 105px;
+  margin-right: 20px;
+  background-color: #2e2e4c;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  overflow: hidden; /* Ensure content doesn't exceed the maximum height */
+}
+
+.box-header {
+  font-family: "Roboto", sans-serif;
+  background-color: #6B52A3;
+  border-radius: 5px 5px 0 0;
+  padding: 10px;
+  text-align: center;
+}
+
+.box-header h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  margin: 0;
+}
+
+.box-content {
+  padding: 5px 5px;
+}
+
+.tag {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.status-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  height: 25px;
+}
+.status {
+  display: flex;
+  align-items: center;
+}
+
+.online-text {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px; 
+}
+
+.setbare {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  color: #fff;
+  background-color: #4CAF50;
+  padding: 1.5px 3px;
+  text-align: center;
+  border: none;
+  margin: 0 auto; /* Center the button horizontally */
+  border-radius: 5px;
+  display:block;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+.setbare:hover {
+  background-color: #45A049;
 }

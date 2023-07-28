@@ -1,8 +1,8 @@
-// This file overwrites the stock UV config.js
+var bareServer = localStorage.getItem(bareServer);
 
 self.__uv$config = {
   prefix: "/uv/service/",
-  bare: "/bare/",
+  bare: bareServer,
   encodeUrl: Ultraviolet.codec.xor.encode,
   decodeUrl: Ultraviolet.codec.xor.decode,
   handler: "/uv/uv.handler.js",

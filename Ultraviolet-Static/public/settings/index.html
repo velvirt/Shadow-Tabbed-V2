@@ -30,8 +30,8 @@
       <div class="section-title">Launch About:blank</div>
       <div class="section-content">
           <p>Click the button to open a new tab with about:blank. About:Blank opens this site as an about:blank, and you can browse this site all you want. Now instead of this website appearing in your histroy, it will just show about:blank</p>
-      </div>
-          <button class="icon-button"><i class="fas fa-rocket"></i> Launch</button>
+        <button class="icon-button"><i class="fas fa-rocket"></i> Launch</button>
+        </div>
     </div>         
     <div class="settings-section">
       <h2 class="section-title">Tab Cloak</h2>
@@ -62,9 +62,9 @@
       </div>
     </div>
     <div class="settings-section">
-      <h2 class="section-title">Themes</h2>
+      <h2 class="section-title">Bare Server Switch</h2>
       <div class="section-content">
-        <p class="section-text">Click on one of the buttons below to change your theme. This will change how the appearance of the site, letting you customize your experience. <br> 
+        <p class="section-text">Switch between bare servers. Some bare servers might be slower or faster based on your location. if
         </p>
         <div class="button-section ">
           <button class="icon-button" onclick="changeTheme('/CSS/index.css')">Default</button>
@@ -75,13 +75,38 @@
         <p style="font-size: 16.5px;color:#d70f0f"><i class="fa-solid fa-x fa-lg" style="color: #d70f0f;"></i> This feature has been disabled due to ongoing updates</p>
       </div>
     </div>       
+    <div class="settings-section">
+      <h2 class="section-title">Bare Server Switch</h2>
+      <div class="section-content">
+        <p class="section-text">Switch between bare servers. Some bare servers might be slower or faster based on your location.</p>
+      </div>
+      <div class="box-container">
+        <div class="box">
+          <div class="box-header">
+            <h3>Bare Server 1</h3>
+          </div>
+          <div class="box-content">
+            <div class="status-container">
+              <p class="tag">Ping: 200ms</p> <br>
+              <div class="status">
+                <div class="flashing-light"></div>
+                <p class="online-text">Status: Online</p> <br> 
+              </div>
+            </div>
+            <button class="setbare">Choose Bare</button>
+          </div>
+        </div>
+        <!-- Add more boxes here if needed -->
+      </div>
+    </div>
+    
+    
   </div>
   <script src="script.js"></script>
 </body>
 
 
 <script>
-  // Function to handle dropdown change event and set the search engine value in local storage
   function setSearchEngine(value) {
     localStorage.setItem("searchengine", value);
   }
@@ -121,11 +146,8 @@
     }
   }
   
-  // Add change event listener to the dropdown
   document.getElementById("searchEngineDropdown").addEventListener("change", toggleCustomSearch);
-  
-  // Show/hide the custom search engine div on initial page load
-  toggleCustomSearch();
+    toggleCustomSearch();
   </script>
   
   

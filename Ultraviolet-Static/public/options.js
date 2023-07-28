@@ -14,21 +14,20 @@ function settingoptions() {
     iframeBox.setAttribute('id', 'iframeBox');
     iframeBox.style.position = 'relative';
     iframeBox.style.margin = 'auto';
-    iframeBox.style.width = '80%';
-    iframeBox.style.backgroundColor = '';
+    iframeBox.style.width = '90%';
+    iframeBox.style.height = '80%';
+    iframeBox.style.backgroundColor = 'none';
     iframeBox.style.border = '1px solid #ccc';
     iframeBox.style.borderRadius = '5px';
     iframeBox.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.15)';
 
-    var closeButton = document.createElement('button');
-    closeButton.textContent = 'X';
+    var closeButton = document.createElement('i');
+    closeButton.innerHTML = '<i class="fa-solid fa-x fa-lg" style="color: #f40b0b;"></i>';
     closeButton.style.position = 'absolute';
-    closeButton.style.top = '5px';
-    closeButton.style.right = '5px';
+    closeButton.style.top = '2px';
+    closeButton.style.right = '10px';
     closeButton.style.padding = '5px 10px';
-    closeButton.style.backgroundColor = '#ccc';
     closeButton.style.border = 'none';
-    closeButton.style.borderRadius = '50%';
     closeButton.style.cursor = 'pointer';
     closeButton.onclick = function() {
         document.body.removeChild(iframeContainer);
@@ -45,4 +44,12 @@ function settingoptions() {
     iframeContainer.appendChild(iframeBox);
 
     document.body.appendChild(iframeContainer);
+    
 }
+
+function openNewTab() {
+    const currentURL = window.location.origin;
+    const newTab = window.open('about:blank', '_blank');
+    newTab.document.write('<html><body style="margin: 0; padding: 0;"><embed src="' + currentURL + '" style="width: 100%; height: 100%;"></embed></body></html>');
+    newTab.document.close();
+  }
