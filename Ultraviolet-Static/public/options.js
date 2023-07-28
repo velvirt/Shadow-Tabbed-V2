@@ -53,3 +53,19 @@ function openNewTab() {
     newTab.document.write('<html><body style="margin: 0; padding: 0;"><embed src="' + currentURL + '" style="width: 100%; height: 100%;"></embed></body></html>');
     newTab.document.close();
   }
+
+  let toggleState = false;
+  function devtooltoggle() {
+    if (toggleState) {
+      eruda.hide();
+      eruda.destroy();
+    } else {
+      var script = document.createElement('script');
+      script.src = "//cdn.jsdelivr.net/npm/eruda";
+      document.body.appendChild(script);
+      script.onload = function () {
+        eruda.init();
+        eruda.show();
+    }}
+    toggleState = !toggleState;
+  };

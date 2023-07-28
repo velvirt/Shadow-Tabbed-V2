@@ -32,7 +32,7 @@
               <div class="dropdown-content">
                 <a onclick="openNewTab()"><i class="fa-solid fa-user-ninja"></i> About:Blank</a>
                 <a onclick="settingoptions()"><i class="fa-solid fa-gear"></i> Settings</a>
-                <a href="#"><i class="fa-solid fa-wrench"></i> Toggle Dev Tools</a>
+                <a href="#" onclick="devtooltoggle()"><i class="fa-solid fa-wrench"></i> Toggle Dev Tools</a>
                 <a href="#"><i class="fa-solid fa-circle-info"></i> Help/Info</a>
                 <a href="#"><i class="fa-solid fa-shuffle"></i> Bare Switcher</a>
               </div>
@@ -110,4 +110,16 @@
       }
     });
   });
+</script>
+
+<script>
+  function calculateServerPing(serverURL) {
+    const beaconData = 'ping-test';
+    const startTime = performance.now();
+    navigator.sendBeacon(serverURL, beaconData);
+    const endTime = performance.now();
+    const pingTime = endTime - startTime;
+    const pingResultElement = document.getElementById('pingResult');
+    alert(`Average ping to ${serverURL}: ${pingTime.toFixed(2)} ms`);
+  }
 </script>
