@@ -80,6 +80,7 @@
       <div class="section-content">
         <p class="section-text">Switch between bare servers. Some bare servers might be slower or faster based on your location.</p>
       </div>
+      <!--Server 1-->
       <div class="box-container">
         <div class="box">
           <div class="box-header">
@@ -93,10 +94,42 @@
                 <p class="online-text">Status: Online</p> <br> 
               </div>
             </div>
-            <button class="setbare">Choose Bare</button>
+            <button class="setbare" onclick="changeBare(/bare/)">Choose Bare</button>
           </div>
         </div>
-        <!-- Add more boxes here if needed -->
+        <!-- Server 2 -->
+        <div class="box">
+          <div class="box-header">
+            <h3>Bare Server 2 (Nowgg Enabled)</h3>
+          </div>
+          <div class="box-content">
+            <div class="status-container">
+              <p class="tag">Ping: 200ms</p> <br>
+              <div class="status">
+                <div class="flashing-light"></div>
+                <p class="online-text">Status: Online</p> <br> 
+              </div>
+            </div>
+            <button class="setbare" onclick="changeBare('use.astroid.wtf/bare/');">Choose Bare</button>
+          </div>
+        </div>
+        <div class="box">
+          <div class="box-header">
+            <!--Custom server-->
+            <h3>Custom server</h3>
+          </div>
+          <div class="box-content">
+            <div class="status-container">
+              <p class="tag">Ping: 200ms</p> <br>
+              <div class="status">
+                <div class="flashing-light"></div>
+                <p class="online-text">Status: Online</p> <br> 
+              </div>
+            </div>
+            <input placeholder="Format: example.com/bare/"></input>
+            <button class="setbare" onclick="customBare = getElementById('customBareInput').value; changeBare(customBare);">Choose Bare</button>
+          </div>
+        </div>
       </div>
     </div>
     
@@ -164,6 +197,10 @@
     const newWindow = window.open('about:blank', '_blank', 'width=800,height=600');
     newWindow.document.write('<html><body style="margin: 0; padding: 0;"><embed src="' + currentURL + '" style="width: 100%; height: 100%;"></embed></body></html>');
     newWindow.document.close();
+  }
+
+  function changeBare(bareUrl) {
+    localStorage.setItem(bareServer, bareUrl);
   }
   
 </script>
