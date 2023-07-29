@@ -313,7 +313,7 @@ function showContextMenu(bookmarkElement, title, link, event) {
     // Close the context menu when clicking anywhere else on the document
     const closeContextMenu = (event) => {
         if (contextMenu && contextMenu.dataset.visible === 'true' && !contextMenu.contains(event.target)) {
-            contextMenu.remove();
+            contextMenu.style.display = 'none'; // Hide the context menu
             document.removeEventListener('click', closeContextMenu);
         }
     };
