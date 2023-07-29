@@ -51,7 +51,6 @@ function addTab(title, src) {
     tabCount++;
     resizeTabs();
 
-    // Add event listeners for the newly created iframe
     const iframe = newTabPanel.querySelector('iframe');
     updateTabTitleFromIframe(iframe);
     iframe.addEventListener('load', function () {
@@ -151,7 +150,7 @@ function updateTabTitleFromIframe(iframe) {
 }
 
 function resizeTabs() {
-    const tabWidth = 100; // Set the width of each tab (change as needed)
+    const tabWidth = 100; 
     const totalTabs = tabsContainer.childElementCount;
     const availableWidth = tabsContainer.offsetWidth;
     const maxVisibleTabs = Math.floor(availableWidth / tabWidth);
@@ -266,7 +265,6 @@ function addBookmark(title, link) {
         const iframe = activeTabPanel.querySelector('iframe');
     });
 
-    // Attach the right-click context menu for editing and deleting
     bookmark.addEventListener('contextmenu', (event) => {
         event.preventDefault();
         showContextMenu(bookmark, title, link, event);
@@ -279,12 +277,10 @@ function addBookmark(title, link) {
         bookmarksContainer.appendChild(bookmark);
     }
 
-    // Save the bookmark to localStorage
     addBookmarkToLocalStorage(title, link);
 }
 
 function showContextMenu(bookmarkElement, title, link, event) {
-    // Check if context menu is already visible
     if (document.querySelector('.context-menu')) {
         return;
     }
@@ -300,17 +296,14 @@ function showContextMenu(bookmarkElement, title, link, event) {
     });
     contextMenu.appendChild(deleteOption);
 
-    // Position the context menu next to the right-clicked bookmark
     contextMenu.style.position = 'absolute';
     contextMenu.style.top = `${event.clientY}px`;
     contextMenu.style.left = `${event.clientX}px`;
 
-    // Add data attribute to indicate the context menu is visible
     contextMenu.dataset.visible = 'true';
 
     document.body.appendChild(contextMenu);
 
-    // Close the context menu when clicking anywhere else on the document
     const closeContextMenu = (event) => {
         if (contextMenu && contextMenu.dataset.visible === 'true' && !contextMenu.contains(event.target)) {
             contextMenu.style.display = 'none'; // Hide the context menu
