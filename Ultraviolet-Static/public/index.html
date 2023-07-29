@@ -13,6 +13,15 @@
     <script src="options.js" defer></script>
 </head>
 <body>
+  <script>
+    var bare = localStorage.getItem("bareServer");
+    if(bare == null) {
+      localStorage.setItem("bareServer", "/bare/");
+      var bare = localStorage.getItem("bareServer");
+    }
+    console.log(bare);
+   
+  </script>
     <div class="tab-container">
         <ul class="tabs"></ul>
         <div class="input-container">

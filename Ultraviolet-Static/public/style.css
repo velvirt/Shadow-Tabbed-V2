@@ -38,6 +38,11 @@ body {
     border-radius: 5px;
     background-color: #2a2a3d;
     color: #fff;
+    outline: none;
+}
+
+.search:focus::placeholder {
+    color: transparent;
 }
 
 .tabs {

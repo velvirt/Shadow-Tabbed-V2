@@ -75,13 +75,13 @@
         <p style="font-size: 16.5px;color:#d70f0f"><i class="fa-solid fa-x fa-lg" style="color: #d70f0f;"></i> This feature has been disabled due to ongoing updates</p>
       </div>
     </div>       
-    <div class="settings-section">
+    <div class="settings-section-wide">
       <h2 class="section-title">Bare Server Switch</h2>
       <div class="section-content">
         <p class="section-text">Switch between bare servers. Some bare servers might be slower or faster based on your location.</p>
       </div>
-      <!--Server 1-->
       <div class="box-container">
+        <!--Server 1-->
         <div class="box">
           <div class="box-header">
             <h3>Bare Server 1</h3>
@@ -113,9 +113,9 @@
             <button class="setbare" onclick="changeBare('use.astroid.wtf/bare/');">Choose Bare</button>
           </div>
         </div>
+        <!--Custom server-->
         <div class="box">
           <div class="box-header">
-            <!--Custom server-->
             <h3>Custom server</h3>
           </div>
           <div class="box-content">
@@ -126,7 +126,7 @@
                 <p class="online-text">Status: Online</p> <br> 
               </div>
             </div>
-            <input placeholder="Format: example.com/bare/"></input>
+            <input placeholder="Format: example.com/bare/" class="input-field"/>
             <button class="setbare" onclick="customBare = getElementById('customBareInput').value; changeBare(customBare);">Choose Bare</button>
           </div>
         </div>
@@ -202,7 +202,8 @@
   function changeBare(bareUrl) {
     localStorage.setItem(bareServer, bareUrl);
   }
-  
+
+
 </script>
 <script src="js/panic.js"></script>
 <script src="js/index.js"></script>

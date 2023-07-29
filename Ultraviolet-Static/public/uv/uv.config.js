@@ -1,8 +1,6 @@
-var bareUrl = localStorage.getItem(bareServer);
-
 self.__uv$config = {
   prefix: "/uv/service/",
-  bare: bareUrl,
+  bare: /bare/, //We want this to dynamically change to value of localStorage.getItem("bareServer");
   encodeUrl: Ultraviolet.codec.xor.encode,
   decodeUrl: Ultraviolet.codec.xor.decode,
   handler: "/uv/uv.handler.js",

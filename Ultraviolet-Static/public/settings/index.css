@@ -25,8 +25,22 @@ body {
   transition: transform 0.3s;
 }
 
-
 .settings-section:hover {
+  transform: translateY(-5px);
+}
+
+.settings-section-wide {
+  margin: 10px;
+  padding: 20px;
+  background-color: #2e2e4c;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  vertical-align: top;
+  transition: transform 0.3s;
+}
+
+
+.settings-section-wide:hover {
   transform: translateY(-5px);
 }
 
