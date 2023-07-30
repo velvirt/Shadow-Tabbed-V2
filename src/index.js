@@ -44,7 +44,7 @@ server.on("upgrade", (req, socket, head) => {
   }
 });
 
-let port = 80;
+let port = 3030;
 
 server.on("listening", () => {
   const address = server.address();
@@ -71,4 +71,4 @@ function shutdown() {
   bare.close();
 }
 
-server.listen(3030);
+server.listen(port);
