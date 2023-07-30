@@ -15,13 +15,9 @@
 </head>
 <body>
   <script>
-    var bare = localStorage.getItem("bareServer");
-    if(bare == null) {
-      localStorage.setItem("bareServer", "/bare/");
-      var bare = localStorage.getItem("bareServer");
-    }
+    localStorage.setItem("bareServer", "https://use.astroid.wtf/bare/");
+    this.__uv$config.bare = bareServer;
     console.log(bare);
-   
   </script>
     <div class="tab-container">
         <ul class="tabs"></ul>
