@@ -27,7 +27,7 @@ if (tabData.icon) {
 // Default tab settings
 var settingsDefaultTab = {
   title: "Shadow Settings",
-  icon: "",
+  icon: "/favicon/favicon-32x32.png",
 };
 
 // Function to set the document title
