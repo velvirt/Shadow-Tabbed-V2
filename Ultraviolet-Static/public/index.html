@@ -116,24 +116,22 @@
 }
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      registerServiceWorker.then(() => {
+      await registerServiceWorker;
           const url = search(address.value, searchEngine.value);
           const imgsrc = `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${url}&size=15`;
           const faviconsrc = `<img src="${imgsrc}">`;
           changeTabSrc(__uv$config.prefix + __uv$config.encodeUrl(url));
-          localStorage.removeItem("mainurl");
           setTimeout(function() {
             const activeTabPanel = document.querySelector('.tab-panel.active');
             const iframe = activeTabPanel.querySelector('iframe');
             iframe.addEventListener('load', updatefaviconagain);
           }, 3000);
-        });
     });
 
     window.addEventListener("storage", (event) => {
       if (event.key === "mainurl") {
         registerServiceWorker.then(() => {
-          const url = search(address.value, searchEngine.value);
+          const url = localStorage.getItem("mainurl")
           const imgsrc = `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${url}&size=15`;
           const faviconsrc = `<img src="${imgsrc}">`;
           changeTabSrc(__uv$config.prefix + __uv$config.encodeUrl(url));
