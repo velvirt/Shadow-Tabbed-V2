@@ -9,6 +9,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
     <link rel="manifest" href="/favicon/site.webmanifest">
+    <script src="js/themes.js"></script>
 </head>
 <body class="settingsbody">
   <div class="container">
@@ -70,12 +71,9 @@
         <p class="section-text">Choose between the theme you like. This will adjust the appearance of the site, like the colors.
         </p>
         <div class="button-section ">
-          <button class="icon-button">Default</button>
-          <button class="icon-button">Light</button>
-          <button class="icon-button">Poop</button>
-          <button class="icon-button">Fracital</button>
+          <button class="icon-button" onclick="changetheme('default'); window.location.reload();">Default</button>
+          <button class="icon-button" onclick="changetheme('light')" style="margin-right: 50%;">Light</button>
         </div> <br>
-        <p style="font-size: 16.5px;color:#d70f0f"><i class="fa-solid fa-x fa-lg" style="color: #d70f0f;"></i> This feature has been disabled due to ongoing updates</p>
       </div>
     </div>       
     <div class="settings-section">
@@ -140,6 +138,8 @@
     
   </div>
   <script src="script.js"></script>
+  <script src="js/themes.js"></script>
+
 </body>
 
 
