@@ -6,7 +6,7 @@ import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
 import { join } from "path";
 import { hostname } from "os";
 import cors from "cors";
-import createBareServer from "@tomphttp/bare-server-node";
+import { createBareServer } from "@tomphttp/bare-server-node";
 
 const bare = createBareServer("/bare/");
 const app = express();
