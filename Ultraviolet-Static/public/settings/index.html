@@ -2,10 +2,13 @@
 <html id="html">
 <head>
   <title>Shadow Settings</title>
-  <link rel="stylesheet" type="text/css" href="index.css">
+  <link rel="stylesheet" type="text/css" href="/CSS/settings.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="/menu.js"> </script>
-  <link rel="icon" type="image/png"  href="">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
 </head>
 <body class="settingsbody">
   <div class="container">
@@ -62,9 +65,9 @@
       </div>
     </div>
     <div class="settings-section">
-      <h2 class="section-title">Bare Server Switch</h2>
+      <h2 class="section-title">Themes</h2>
       <div class="section-content">
-        <p class="section-text">Switch between bare servers. Some bare servers might be slower or faster based on your location. if
+        <p class="section-text">Choose between the theme you like. This will adjust the appearance of the site, like the colors.
         </p>
         <div class="button-section ">
           <button class="icon-button" onclick="changeTheme('/CSS/index.css')">Default</button>
@@ -75,7 +78,7 @@
         <p style="font-size: 16.5px;color:#d70f0f"><i class="fa-solid fa-x fa-lg" style="color: #d70f0f;"></i> This feature has been disabled due to ongoing updates</p>
       </div>
     </div>       
-    <div class="settings-section-wide">
+    <div class="settings-section">
       <h2 class="section-title">Bare Server Switch</h2>
       <div class="section-content">
         <p class="section-text">Switch between bare servers. Some bare servers might be slower or faster based on your location.</p>
@@ -98,7 +101,7 @@
           </div>
         </div>
         <!-- Server 2 -->
-        <div class="box">
+      <!--- <div class="box">
           <div class="box-header">
             <h3>Bare Server 2 (Nowgg Enabled)</h3>
           </div>
@@ -112,7 +115,7 @@
             </div>
             <button class="setbare" onclick="changeBare('https://use.astroid.wtf/bare/');">Choose Bare</button>
           </div>
-        </div>
+        </div> -->
         <!--Custom server-->
         <div class="box">
           <div class="box-header">
@@ -126,13 +129,14 @@
                 <p class="online-text">Status: Online</p> <br> 
               </div>
             </div>
-            <input placeholder="Format: example.com/bare/" class="input-field"/>
+            <input style="width:93%;padding:3px" placeholder="example.com/bare/" class="input-field"/>
             <button class="setbare" onclick="customBare = getElementById('customBareInput').value; changeBare(customBare);">Choose Bare</button>
           </div>
         </div>
       </div>
     </div>
-    
+    <div class="settings-section">     <h2 class="section-title">Coming Soon</h2> <div class="section-content"> <p class="section-text">New Setting Coming Soon</p> </div></div>
+
     
   </div>
   <script src="script.js"></script>

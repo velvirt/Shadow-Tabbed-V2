@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tab System</title>
+    <title>Shadow Browser</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+    <link rel="stylesheet" href="CSS/index.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
     <script src="uv/uv.bundle.js" defer></script>
     <script src="uv/uv.config.js" defer></script>
     <script src="register-sw.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
     <script src="search.js" defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,500,1,0" />
     <script src="index.js" defer></script>
@@ -33,19 +37,13 @@
                 <input id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"/>
             </form>
             <button id="bookmark-btn" style="border:none; z-index: 99999; margin-right: 15px; "><span class="material-symbols-outlined" style="color:yellow">star</span></button>
-            <div class="dropdown">
-                <button class="dropdown-button">
-                    <i class="fa-solid fa-caret-down fa-lg"></i> Accessibility & Tools
-                </button>
-                <div class="dropdown-content">
-                    <a onclick="openNewTab()"><i class="fa-solid fa-user-ninja"></i> About:Blank</a>
-                    <a onclick="settingoptions()"><i class="fa-solid fa-gear"></i> Settings</a>
-                    <a href="#" onclick="devtooltoggle()"><i class="fa-solid fa-wrench"></i> Toggle Dev Tools</a>
-                    <a href="#"><i class="fa-solid fa-circle-info"></i> Help/Info</a>
-                    <a href="#"><i class="fa-solid fa-shuffle"></i> Bare Switcher</a>
-                </div>
-            </div>
-        
+                <div class="rightcontrol">
+                    <a onclick="openNewTab()"><i class="fa-solid fa-user-ninja"></i></a>
+                    <a onclick="settingoptions()"><i class="fa-solid fa-gear"></i></a>
+                    <a href="#" onclick="devtooltoggle()"><i class="fa-solid fa-wrench"></i></a>
+                    <a href="#"><i class="fa-solid fa-circle-info"></i></a>
+                    <a href="#"><i class="fa-solid fa-shuffle"></i></a>
+                </div>        
         </div>
         <div class="bookmarks-panel" id="bookmarks-panel">
           <!-- Bookmarks will be  added here -->
