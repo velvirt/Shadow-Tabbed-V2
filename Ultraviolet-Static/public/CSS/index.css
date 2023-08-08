@@ -214,14 +214,12 @@ iframe {
   margin-bottom: 5px;
   padding: 0 10px;
   height: 24px;
-  /* Adjust the height of bookmarks */
   text-decoration: none;
   color: var(--main-text-color);
-  /* White text color for bookmark links */
   border-radius: 5px;
   transition: background-color 0.3s;
   background-color: var(--primary-background-color);
-  /* Background color for bookmarks links */
+  cursor: pointer;
 }
 
 #bookmarks-panel a:hover {
